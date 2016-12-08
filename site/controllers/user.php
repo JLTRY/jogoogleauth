@@ -56,12 +56,12 @@ class JGoogleControllerUser extends JGoogleController
 	 * @since   1.6
 	 */
 	public function login()
-	{
-		//JSession::checkToken('post') or jexit(JText::_('JINVALID_TOKEN'));
-		echo "user.login";
-		JGoogleHelper::my_log("user.login");
-		
+	{		
 		JGoogleHelper::my_log("authentificate");
+		$return = JFactory::getApplication()->input->getInt('Itemid', null);
+		JGoogleHelper::my_log("Itemid:" .$return);
+		$app = JFactory::getApplication();
+		$app->setUserState( 'Itemid', $return);
 		$this->oauth_client->authenticate();
 		JGoogleHelper::my_log("authentificate end");
 	}
@@ -69,12 +69,9 @@ class JGoogleControllerUser extends JGoogleController
 	
 	public function auth()
 	{
-		JGoogleHelper::my_log("google auth");
-		echo "google auth";
+		JGoogleHelper::my_log("google auth");		
 		$this->oauth_client->setOption('sendheaders',false);
-		$this->oauth_client->authenticate();
-		
-		
+		$this->oauth_client->authenticate();		
 		if($this->oauth_client->isAuthenticated())
 		{
 			JGoogleHelper::my_log("isauthentificated");			
@@ -95,20 +92,9 @@ class JGoogleControllerUser extends JGoogleController
 			JGoogleHelper::my_log("on user login " . print_r($options, true) . print_r($response, true));
 			$user =  JGoogleHelper::getUser((array)$response);
 			$results = $app->login((array)$response, $options);			
-			JGoogleHelper::my_log("on user login end" . print_r($results, true));
-			if ($response->type == 'Cookie')
-			{
-				$user->set('cookieLogin', true);
-			}
-			if (in_array(false, $results, true) == false)
-			{					
-				$options['user'] = $user;
-				$options['responseType'] = $response->type;
-				// The user is successfully logged in. Run the after login events
-				//JFactory::getApplication()->triggerEvent('onUserAfterLogin', array($options));
-				JFactory::getApplication()->redirect(JRoute::_('index.php', false));
-			}			
+			JGoogleHelper::my_log("on user login end" . print_r($results, true));			
 		}
+		$app->redirect(JRoute::_('index.php?Itemid=' . $app->getUserState( 'Itemid'), false));
 	}
 	/**
 	 * Method to log out a user.
