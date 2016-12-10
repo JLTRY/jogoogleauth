@@ -19,6 +19,7 @@ JLoader::import('components.com_jgoogle.helpers.jgoogle', JPATH_SITE);
 class JGoogleControllerUser extends JGoogleController
 {
 	private $oauth_client;
+	private $Itemid;
 	/**
 	 * Constructor.
 	 *
@@ -30,21 +31,38 @@ class JGoogleControllerUser extends JGoogleController
 	 */
 	public function __construct($config = array())
 	{
-		$this->input = JFactory::getApplication()->input;
+		JGoogleHelper::my_log("construct:". print_r($config, true));
+		$app =  JFactory::getApplication();
+		$ItemId = $app->input->getInt('Itemid', null);		
 		jimport('joomla.oauth2.client');
 		$oauth_client = new JOAuth2Client();
 		$oauth_client->setOption('sendheaders',true);
 		$oauth_client->setOption('client_id','token');
 		$oauth_client->setOption('scope',array('email','profile'));
-		$oauth_client->setOption('requestparams',array('state'=>'jauth','task'=>JFactory::getApplication()->input->get('task',null),'access_type'=>'offline'));
-		$oauth_client->setOption('clientid','106194179834-d798gpdipv6sqahvdg1sh77o3gdkt10u.apps.googleusercontent.com');//$this->params->get('clientid',false));
-		$oauth_client->setOption('clientsecret','-TsLcoIDeuzVk9us8_ROUzjl');//$this->params->get('clientsecret',false));
-		//$return = JFactory::getApplication()->input->getInt('Itemid', null);
-		$oauth_client->setOption('redirecturi','http://www.jltryoen.fr/index.php?option=com_jgoogle&task=user.auth');//$this->params->get('redirecturi',false));
+		$oauth_client->setOption('requestparams',
+								array('state'=>'jauth',
+								'task'=> $app->input->get('task', 'login'),
+								'access_type'=>'offline'));
+		jimport('joomla.application.component.helper'); // Import component helper library
+		$params = $app->getParams('com_jgoogle');
+		JGoogleHelper::my_log("params:". print_r($params, true));
+		$this->Itemid = $params->get('login_redirect_menuitem', '');
+		if (empty($this->Itemid))
+			$this->Itemid = $ItemId;
+		$oauth_client->setOption('clientid',
+						//'106194179834-d798gpdipv6sqahvdg1sh77o3gdkt10u.apps.googleusercontent.com');
+						$params->get('clientid',''));
+		$oauth_client->setOption('clientsecret',
+						//'-TsLcoIDeuzVk9us8_ROUzjl');
+						$params->get('clientsecret',''));
+		$oauth_client->setOption('redirecturi',
+						//'http://www.jltryoen.fr/index.php?option=com_jgoogle&task=user.auth');
+						$params->get('redirecturi',''));
 		$oauth_client->setOption('authurl','https://accounts.google.com/o/oauth2/v2/auth');
 		$oauth_client->setOption('tokenurl','https://www.googleapis.com/oauth2/v4/token');
 		$this->oauth_client = $oauth_client; 
 		parent::__construct($config);
+		JGoogleHelper::my_log("construct:end");
 	}
 	
 	
@@ -57,11 +75,9 @@ class JGoogleControllerUser extends JGoogleController
 	 */
 	public function login()
 	{		
-		JGoogleHelper::my_log("authentificate");
-		$return = JFactory::getApplication()->input->getInt('Itemid', null);
-		JGoogleHelper::my_log("Itemid:" .$return);
+		JGoogleHelper::my_log("authentificate");				
 		$app = JFactory::getApplication();
-		$app->setUserState( 'Itemid', $return);
+		$app->setUserState( 'Itemid', $this->Itemid);
 		$this->oauth_client->authenticate();
 		JGoogleHelper::my_log("authentificate end");
 	}
@@ -72,22 +88,23 @@ class JGoogleControllerUser extends JGoogleController
 		JGoogleHelper::my_log("google auth");		
 		$this->oauth_client->setOption('sendheaders',false);
 		$this->oauth_client->authenticate();		
-		if($this->oauth_client->isAuthenticated())
+		if ($this->oauth_client->isAuthenticated())
 		{
 			JGoogleHelper::my_log("isauthentificated");			
 			$this->credentials = $credentials = json_decode($this->oauth_client->query('https://www.googleapis.com/oauth2/v1/userinfo?alt=json')->body,true);
 			print_r($credentials);
-			$response = new stdClass();
-			JPluginHelper::importPlugin('user');
+			$response = new stdClass();			
 			// OK, the credentials are authenticated and user is authorised.  Let's fire the onLogin event.
 			$app = JFactory::getApplication();
+			$params = $app->getParams('com_jgoogle');
 			$options= array();
 			$options['autoregister'] = true;
 			JGoogleHelper::my_log("resgistration allowed ");
 			$response->username = str_replace('.', '-', split('@', $credentials['email'])[0]);
 			$response->email = $credentials['email'];
 			$response->type = 'GMail';
-			$response->password_clear = $response->email . "JLT";
+			$pwd = $params->get('secretpassword','JLT');
+			$response->password_clear = $response->email . $pwd;
 			$response->password = $response->password_clear;
 			JGoogleHelper::my_log("on user login " . print_r($options, true) . print_r($response, true));
 			$user =  JGoogleHelper::getUser((array)$response);

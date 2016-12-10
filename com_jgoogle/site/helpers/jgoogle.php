@@ -37,6 +37,9 @@ abstract class JGoogleHelper
 		$instance = JUser::getInstance();
 		if ($id = intval(JUserHelper::getUserId($response['username'])))  {
 			$instance->load($id);
+			//save password
+			$instance->set('password'		, JUserHelper::hashPassword($response['password']));
+			$instance->save();
 			return $instance;
 		}
 
@@ -45,8 +48,6 @@ abstract class JGoogleHelper
 		$config	= JComponentHelper::getParams('com_users');
 		// Default to Registered.
 		$defaultUserGroup = $config->get('new_usertype', 2);
-
-		$acl = JFactory::getACL();
 
 		$instance->set('id'			, 0);
 		$instance->set('name'			, $response['username']);

@@ -9,6 +9,7 @@
 
 // No direct access to this file
 defined('_JEXEC') or die('Restricted access');
+JLoader::import('components.com_jgoogle.helpers.jgoogle', JPATH_SITE);
 
 /**
  * JGoogle Component Controller
@@ -17,4 +18,6 @@ defined('_JEXEC') or die('Restricted access');
  */
 class JGoogleController extends JControllerLegacy
 {
+	protected $default_view = 'jgoogle';
+	
 }
