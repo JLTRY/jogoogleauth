@@ -1,4 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 <config>
-	
+	<fieldset
+		name="params"
+		label="JGLOBAL_FIELDSET_DISPLAY_OPTIONS">
+		<field
+			name="clientid"
+			type="text"			
+			maxlength="128"
+			size="64"
+			label="COM_JGOOGLE_FIELD_CLIENTID"
+			description="COM_JGOOGLE_FIELD_CLIENTID_DESC">			
+		</field>
+		<field
+			name="clientsecret"
+			type="text"
+			maxlength="128"
+			size="64"
+			label="COM_JGOOGLE_FIELD_CLIENTSECRET"
+			description="COM_JGOOGLE_FIELD_CLIENTSECRET_DESC">
+		</field>
+		<field
+			name="redirecturi"
+			type="url"
+			label="COM_JGOOGLE_FIELD_REDIRECTURI"
+			description="COM_JGOOGLE_FIELD_REDIRECTURI_DESC">			
+		</field>
+		<field
+			name="secretpassword"
+			type="text"
+			label="COM_JGOOGLE_FIELD_SECRETPASSWORD"
+			description="COM_JGOOGLE_FIELD_SECRETPASSWORD_DESC">			
+		</field>	
+	</fieldset>
+	<fieldset
+		name="permissions"
+		label="JCONFIG_PERMISSIONS_LABEL"
+		description="JCONFIG_PERMISSIONS_DESC">
+		<field
+			name="rules"
+			type="rules"
+			label="JCONFIG_PERMISSIONS_LABEL"
+			class="inputbox"
+			validate="rules"
+			filter="rules"
+			component="com_jgoogle"
+			section="component"	/>
+	</fieldset>
 </config>

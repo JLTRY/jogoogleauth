@@ -9,7 +9,8 @@
 
 // No direct access to this file
 defined('_JEXEC') or die('Restricted access');
-
+JFactory::getLanguage()->load('com_users', JPATH_ADMINISTRATOR, null ,true);
+JFactory::getLanguage()->load('com_users', JPATH_SITE, null ,true);
 // Set some global property
 $document = JFactory::getDocument();
 
