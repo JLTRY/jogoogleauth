@@ -33,8 +33,11 @@ class JGoogleViewempty extends JViewLegacy
 	public function display($tpl = null)
 	{
 		$this->addToolBar();
+		// Set the document
+		$this->setDocument();
 		// Display the template
 		parent::display($tpl);	
+		
 	}
 	
 	protected function addToolBar()
@@ -46,6 +49,18 @@ class JGoogleViewempty extends JViewLegacy
 			JToolBarHelper::preferences('com_jgoogle');
 		}
 	}
+	
+	/**
+	 * Method to set up the document properties
+	 *
+	 * @return void
+	 */
+	protected function setDocument() 
+	{
+		$document = JFactory::getDocument();
+		$document->addScript(JURI::root() . "/administrator/components/com_jgoogle"
+		                                  . "/views/empty/params.js");
+	}	
 
 	
 }
