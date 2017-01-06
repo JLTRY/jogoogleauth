@@ -49,7 +49,9 @@
 			<filename>index.html</filename>
 			<filename>config.xml</filename>
 			<filename>access.xml</filename>
-			<filename>jgoogle.php</filename>			
+			<filename>jgoogle.php</filename>
+			<folder>views</folder>
+			<folder>fields</folder>
 		</files>
 		<languages folder="language">			
 		</languages>
