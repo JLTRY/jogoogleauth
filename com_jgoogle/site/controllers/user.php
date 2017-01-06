@@ -33,7 +33,8 @@ class JGoogleControllerUser extends JGoogleController
 	{
 		JGoogleHelper::my_log("construct:". print_r($config, true));
 		$app =  JFactory::getApplication();
-		$ItemId = $app->input->getInt('Itemid', null);		
+		$ItemId = $app->input->getInt('Itemid', null);
+		JGoogleHelper::my_log("construct:". print_r($ItemId, true));
 		jimport('joomla.oauth2.client');
 		$oauth_client = new JOAuth2Client();
 		$oauth_client->setOption('sendheaders',true);
@@ -56,7 +57,7 @@ class JGoogleControllerUser extends JGoogleController
 		$oauth_client->setOption('tokenurl','https://www.googleapis.com/oauth2/v4/token');
 		$this->oauth_client = $oauth_client; 
 		parent::__construct($config);
-		JGoogleHelper::my_log("construct:end");
+		JGoogleHelper::my_log("construct:end" . $this->Itemid);
 	}
 	
 	
@@ -72,6 +73,7 @@ class JGoogleControllerUser extends JGoogleController
 		JGoogleHelper::my_log("authentificate");				
 		$app = JFactory::getApplication();
 		$app->setUserState( 'Itemid', $this->Itemid);
+		JGoogleHelper::my_log("userstate" . $this->Itemid);		
 		$this->oauth_client->authenticate();
 		JGoogleHelper::my_log("authentificate end");
 	}
@@ -115,7 +117,10 @@ class JGoogleControllerUser extends JGoogleController
 			$results = $app->login((array)$response, $options);			
 			JGoogleHelper::my_log("on user login end" . print_r($results, true));			
 		}
-		$app->redirect(JRoute::_('index.php?Itemid=' . $app->getUserState( 'Itemid'), false));
+		if ($app->getUserState( 'Itemid'))
+			$app->redirect(JRoute::_('index.php?Itemid=' . $app->getUserState( 'Itemid'), false));
+		else	
+			$app->redirect(JRoute::_('index.php'), false);
 	}
 	/**
 	 * Method to log out a user.
