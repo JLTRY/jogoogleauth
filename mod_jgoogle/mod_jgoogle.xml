@@ -27,15 +27,15 @@
 				</field>
 
 				<field
-					name="login_redirect_url"
-					type="text"
-					label="JFIELD_LOGIN_REDIRECT_URL_LABEL"
-					description="JFIELD_LOGIN_REDIRECT_URL_DESC"
-					class="inputbox"				
-					field="login_redirect_menuitem"
-					hint="COM_USERS_FIELD_LOGIN_REDIRECT_PLACEHOLDER"
-					message="COM_USERS_FIELD_LOGIN_REDIRECT_ERROR"
-					showon="loginredirectchoice:0"
+				name="login_redirect_url"
+				type="text"
+				label="JFIELD_LOGIN_REDIRECT_URL_LABEL"
+				description="JFIELD_LOGIN_REDIRECT_URL_DESC"
+				class="inputbox"				
+				field="login_redirect_menuitem"
+				hint="COM_USERS_FIELD_LOGIN_REDIRECT_PLACEHOLDER"
+				message="COM_USERS_FIELD_LOGIN_REDIRECT_ERROR"
+				showon="loginredirectchoice:0"
 				/>
 
 				<field
