@@ -55,5 +55,11 @@
 		</files>
 		<languages folder="language">			
 		</languages>
-	</administration>		
+	</administration>
+	<layout>
+		<files folder="templates/protostar/html">		
+			<folder>com_users</folder>
+			<folder>mod_login</folder>
+		</files>
+	</layout>
 </extension>		
