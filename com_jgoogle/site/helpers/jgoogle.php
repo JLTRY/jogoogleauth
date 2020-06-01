@@ -37,8 +37,8 @@ abstract class JGoogleHelper
 			$instance = JUser::getInstance();
 			$instance->load($id);
 			//save password
-			$instance->set('password'		, JUserHelper::hashPassword($response['password']));
-			$instance->save();
+			//$instance->set('password'		, JUserHelper::hashPassword($response['password']));
+			//$instance->save();
 			return $instance;
 		}
 		return null;

@@ -8,7 +8,7 @@
  */
 
 defined('_JEXEC') or die;
-
+use Joomla\OAuth2\Client;
 JLoader::register('JGoogleController', JPATH_COMPONENT . '/controller.php');
 JLoader::import('components.com_jgoogle.helpers.jgoogle', JPATH_SITE);
 /**
@@ -35,8 +35,7 @@ class JGoogleControllerUser extends JGoogleController
 		$app =  JFactory::getApplication();
 		$ItemId = $app->input->getInt('Itemid', null);
 		JGoogleHelper::my_log("construct:". print_r($ItemId, true));
-		jimport('joomla.oauth2.client');
-		$oauth_client = new JOAuth2Client();
+		$oauth_client = new Client([], null, null, $app, $this);
 		$oauth_client->setOption('sendheaders',true);
 		$oauth_client->setOption('client_id','token');
 		$oauth_client->setOption('scope',array('email','profile'));
@@ -61,6 +60,11 @@ class JGoogleControllerUser extends JGoogleController
 	}
 	
 	
+	public function log($str)
+	{
+		JGoogleHelper::my_log($str);
+	}
+	
 	/**
 	 * Method to log in a user.
 	 *
@@ -69,11 +73,13 @@ class JGoogleControllerUser extends JGoogleController
 	 * @since   1.6
 	 */
 	public function login()
-	{		
-		JGoogleHelper::my_log("authentificate");				
+	{
+		JGoogleHelper::my_log("authentificate");
 		$app = JFactory::getApplication();
+		JGoogleHelper::my_log("getapplication OK");
 		$app->setUserState( 'Itemid', $this->Itemid);
-		JGoogleHelper::my_log("userstate" . $this->Itemid);		
+		JGoogleHelper::my_log("userstate" . $this->Itemid);
+		JGoogleHelper::my_log("oauth_client" . print_r(get_class($this->oauth_client), true));
 		$this->oauth_client->authenticate();
 		JGoogleHelper::my_log("authentificate end");
 	}
@@ -81,14 +87,14 @@ class JGoogleControllerUser extends JGoogleController
 	
 	public function auth()
 	{
-		JGoogleHelper::my_log("google auth");		
+		JGoogleHelper::my_log("google auth");
 		$this->oauth_client->setOption('sendheaders',false);
-		$this->oauth_client->authenticate();		
+		$this->oauth_client->authenticate();
 		if ($this->oauth_client->isAuthenticated())
 		{
-			JGoogleHelper::my_log("isauthentificated");			
-			$this->credentials = $credentials = json_decode($this->oauth_client->query('https://www.googleapis.com/oauth2/v1/userinfo?alt=json')->body,true);			
-			$response = new stdClass();			
+			JGoogleHelper::my_log("isauthentificated");
+			$this->credentials = $credentials = json_decode($this->oauth_client->query('https://www.googleapis.com/oauth2/v1/userinfo?alt=json')->body,true);
+			$response = new stdClass();
 			// OK, the credentials are authenticated and user is authorised.  Let's fire the onLogin event.
 			$app = JFactory::getApplication();
 			$params = $app->getParams('com_jgoogle');
@@ -107,19 +113,27 @@ class JGoogleControllerUser extends JGoogleController
 			$response->fromname = $config->get('fromname');
 			$response->mailfrom = $config->get('mailfrom');
 			$response->sitename = $config->get('sitename');
-			
+
 			JGoogleHelper::my_log("on user login " . print_r($options, true) . print_r($response, true));
 			$user =  JGoogleHelper::getUser((array)$response);
 			if ($user == null) {
+				JGoogleHelper::my_log("registerUSer" . print_r($results, true));
 				$user = JGoogleHelper::registerUser((array)$response);
 				$user = JGoogleHelper::sendregisteredUserMail((array)$response);
 			}
-			$results = $app->login((array)$response, $options);			
-			JGoogleHelper::my_log("on user login end" . print_r($results, true));			
+			else {
+				JGoogleHelper::my_log("user is not null 1" . print_r($user, true));
+			}
+			$user =  JGoogleHelper::getUser((array)$response);
+			JGoogleHelper::my_log("user is not null 2" . print_r($user, true));
+			$results = $app->login((array)$response, $options);
+			$user =  JGoogleHelper::getUser((array)$response);
+			JGoogleHelper::my_log("user is not null 3" . print_r($user, true));
+			JGoogleHelper::my_log("on user login end" . print_r($results, true));
 		}
 		if ($app->getUserState( 'Itemid'))
 			$app->redirect(JRoute::_('index.php?Itemid=' . $app->getUserState( 'Itemid'), false));
-		else	
+		else
 			$app->redirect(JRoute::_('index.php'), false);
 	}
 	/**
@@ -203,5 +217,5 @@ class JGoogleControllerUser extends JGoogleController
 		$app->redirect(JRoute::_($return, false));
 	}
 
-	
+
 }
