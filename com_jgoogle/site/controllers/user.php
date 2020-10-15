@@ -46,9 +46,10 @@ class JGoogleControllerUser extends JGoogleController
 		jimport('joomla.application.component.helper'); // Import component helper library
 		$params = $app->getParams('com_jgoogle');
 		JGoogleHelper::my_log("params:". print_r($params, true));
-		$this->Itemid = $params->get('login_redirect_menuitem', '');
-		if (empty($this->Itemid))
-			$this->Itemid = $ItemId;
+		$this->ItemId = $params->get('login_redirect_menuitem', '');
+		JGoogleHelper::my_log("itemid:". print_r($this->ItemIds, true));
+		if (empty($this->ItemId))
+			$this->ItemId = $ItemId;
 		$oauth_client->setOption('clientid',	$params->get('clientid',''));
 		$oauth_client->setOption('clientsecret', $params->get('clientsecret',''));
 		$oauth_client->setOption('redirecturi', $params->get('redirecturi',''));
@@ -56,7 +57,7 @@ class JGoogleControllerUser extends JGoogleController
 		$oauth_client->setOption('tokenurl','https://www.googleapis.com/oauth2/v4/token');
 		$this->oauth_client = $oauth_client; 
 		parent::__construct($config);
-		JGoogleHelper::my_log("construct:end" . $this->Itemid);
+		JGoogleHelper::my_log("construct:end" . $this->ItemId);
 	}
 	
 	
@@ -77,8 +78,8 @@ class JGoogleControllerUser extends JGoogleController
 		JGoogleHelper::my_log("authentificate");
 		$app = JFactory::getApplication();
 		JGoogleHelper::my_log("getapplication OK");
-		$app->setUserState( 'Itemid', $this->Itemid);
-		JGoogleHelper::my_log("userstate" . $this->Itemid);
+		$app->setUserState( 'Itemid', $this->ItemId);
+		JGoogleHelper::my_log("userstate" . $this->ItemId);
 		JGoogleHelper::my_log("oauth_client" . print_r(get_class($this->oauth_client), true));
 		$this->oauth_client->authenticate();
 		JGoogleHelper::my_log("authentificate end");
@@ -131,7 +132,9 @@ class JGoogleControllerUser extends JGoogleController
 			JGoogleHelper::my_log("user is not null 3" . print_r($user, true));
 			JGoogleHelper::my_log("on user login end" . print_r($results, true));
 		}
-		if ($app->getUserState( 'Itemid'))
+		if ($this->ItemId)
+			$app->redirect(JRoute::_('index.php?Itemid=' . $this->ItemId, false));
+		elseif ($app->getUserState( 'Itemid'))
 			$app->redirect(JRoute::_('index.php?Itemid=' . $app->getUserState( 'Itemid'), false));
 		else
 			$app->redirect(JRoute::_('index.php'), false);
