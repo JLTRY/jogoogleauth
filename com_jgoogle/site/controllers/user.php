@@ -20,6 +20,7 @@ class JGoogleControllerUser extends JGoogleController
 {
 	private $oauth_client;
 	private $Itemid;
+	private $log = false;
 	/**
 	 * Constructor.
 	 *
@@ -31,11 +32,13 @@ class JGoogleControllerUser extends JGoogleController
 	 */
 	public function __construct($config = array())
 	{
-		JGoogleHelper::my_log("construct:". print_r($config, true));
+		$this->log = false;
+		$this->log("construct: JGoogleControllerUser:". print_r($config, true));
 		$app =  JFactory::getApplication();
 		$ItemId = $app->input->getInt('Itemid', null);
-		JGoogleHelper::my_log("construct:". print_r($ItemId, true));
+		$this->log("construct:Itemid new client". print_r($ItemId, true));
 		$oauth_client = new Client([], null, null, $app, $this);
+		$this->log("construct:client OK");
 		$oauth_client->setOption('sendheaders',true);
 		$oauth_client->setOption('client_id','token');
 		$oauth_client->setOption('scope',array('email','profile'));
@@ -45,9 +48,10 @@ class JGoogleControllerUser extends JGoogleController
 							  'access_type'=>'offline'));
 		jimport('joomla.application.component.helper'); // Import component helper library
 		$params = $app->getParams('com_jgoogle');
-		JGoogleHelper::my_log("params:". print_r($params, true));
+		$this->log("params:". print_r($params, true));
+		$this->log("itemid2 set:". print_r($this->ItemIds, true));
 		$this->ItemId = $params->get('login_redirect_menuitem', '');
-		JGoogleHelper::my_log("itemid:". print_r($this->ItemIds, true));
+		$this->log("itemid2:". print_r($this->ItemIds, true));
 		if (empty($this->ItemId))
 			$this->ItemId = $ItemId;
 		$oauth_client->setOption('clientid',	$params->get('clientid',''));
@@ -55,15 +59,19 @@ class JGoogleControllerUser extends JGoogleController
 		$oauth_client->setOption('redirecturi', $params->get('redirecturi',''));
 		$oauth_client->setOption('authurl','https://accounts.google.com/o/oauth2/v2/auth');
 		$oauth_client->setOption('tokenurl','https://www.googleapis.com/oauth2/v4/token');
+		$this->log("construct:end before oauth_client" . $this->ItemId);
 		$this->oauth_client = $oauth_client; 
+		$this->log("construct:end after oauth_client" . $this->ItemId);
 		parent::__construct($config);
-		JGoogleHelper::my_log("construct:end" . $this->ItemId);
+		$this->log("construct:end" . $this->ItemId);
 	}
 	
 	
 	public function log($str)
 	{
-		JGoogleHelper::my_log($str);
+		if ($this->log) {
+			JGoogleHelper::my_log($str);
+		}
 	}
 	
 	/**
