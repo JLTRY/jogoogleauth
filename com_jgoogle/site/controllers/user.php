@@ -32,7 +32,7 @@ class JGoogleControllerUser extends JGoogleController
 	 */
 	public function __construct($config = array())
 	{
-		$this->log = false;
+		$this->log = true;
 		$this->log("construct: JGoogleControllerUser:". print_r($config, true));
 		$app =  JFactory::getApplication();
 		$ItemId = $app->input->getInt('Itemid', null);
@@ -140,6 +140,7 @@ class JGoogleControllerUser extends JGoogleController
 			JGoogleHelper::my_log("user is not null 3" . print_r($user, true));
 			JGoogleHelper::my_log("on user login end" . print_r($results, true));
 		}
+        $app =  JFactory::getApplication();
 		if ($this->ItemId)
 			$app->redirect(JRoute::_('index.php?Itemid=' . $this->ItemId, false));
 		elseif ($app->getUserState( 'Itemid'))
