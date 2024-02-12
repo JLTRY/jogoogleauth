@@ -76,11 +76,11 @@ class plgUserJGoogle extends JPlugin implements SubscriberInterface
         $this->injectedCSSandJS = true;
 
         $document = JFactory::getDocument();
-		//$document->addScript(JUri::root() . '/plugins/user/jgoogle/jgoogle.js');
-        $document->addScriptDeclaration('$(document).ready(function() {
+		$document->addScript(JUri::root() . '/plugins/user/jgoogle/jgoogle.js');
+        /*$document->addScriptDeclaration('$(document).ready(function() {
                                         $(".plg_google_login_button").click(function() {
                                           window.location = "' . Route::_("/index.php?option=com_jgoogle&task=user.login") .
-                                        '"})})(jQuery);');       
+                                        '"})})(jQuery);');*/
     }
     
     // Add JGoogle button

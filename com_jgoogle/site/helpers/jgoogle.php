@@ -213,7 +213,7 @@ abstract class JGoogleHelper
 		return false;
 	}
 	
-	public static function my_log($msg){		
+	public static function my_log($msg){
 		$LOGFILE = dirname(__FILE__) . "/../log/log.oauth.txt";
 		$dir = dirname(__FILE__) . "/../log";
 		if (!JGoogleHelper::folder_exist($dir))
