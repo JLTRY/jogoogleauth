@@ -32,7 +32,7 @@ abstract class JGoogleHelper
 	 * @return	object	A JUser object	 
 	 */	
 	public static function getUser($response, $options = array())
-	{		
+	{
 		if ($id = intval(JUserHelper::getUserId($response['username'])))  {
 			$instance = JUser::getInstance();
 			$instance->load($id);
@@ -51,7 +51,7 @@ abstract class JGoogleHelper
 	 * @param	array	$response Holds the user data.
 	 * @param	array	$options	Array holding options (remember, autoregister, group).
 	 *
-	 * @return	object	A JUser object	 
+	 * @return	object	A JUser object
 	 */	
 	
 	 

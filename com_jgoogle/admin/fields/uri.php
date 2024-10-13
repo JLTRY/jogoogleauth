@@ -27,7 +27,7 @@ class JFormFieldURI extends JFormFieldUrl
 	
 	public function getInput ()
 	{
-		$root = str_replace("http", "https", JURI::root());
+		$root = str_replace("http:", "https:", JURI::root());
 		$this->value = $root . $this->default;
 		$this->readonly = true;
 		return  parent::getInput();

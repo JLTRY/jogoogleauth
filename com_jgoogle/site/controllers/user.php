@@ -36,6 +36,11 @@ class JGoogleControllerUser extends JGoogleController
 		$this->log("construct: JGoogleControllerUser:". print_r($config, true));
 		$app =  JFactory::getApplication();
 		$ItemId = $app->input->getInt('Itemid', null);
+		$return = $app->input->getString('return', '');
+		$session = JFactory::getSession();
+		if ($return) {
+			$session->set('redirecturi', base64_decode($return));
+		}
 		$this->log("construct:Itemid new client". print_r($ItemId, true));
 		$oauth_client = new Client([], null, null, $app, $this);
 		$this->log("construct:client OK");
@@ -56,7 +61,7 @@ class JGoogleControllerUser extends JGoogleController
 			$this->ItemId = $ItemId;
 		$oauth_client->setOption('clientid',	$params->get('clientid',''));
 		$oauth_client->setOption('clientsecret', $params->get('clientsecret',''));
-		$oauth_client->setOption('redirecturi', $params->get('redirecturi',''));
+		$oauth_client->setOption('redirecturi', $params->get('redirecturi',''));// . 'return=' . $return);
 		$oauth_client->setOption('authurl','https://accounts.google.com/o/oauth2/v2/auth');
 		$oauth_client->setOption('tokenurl','https://www.googleapis.com/oauth2/v4/token');
 		$this->log("construct:end before oauth_client" . $this->ItemId);
@@ -140,13 +145,19 @@ class JGoogleControllerUser extends JGoogleController
 			JGoogleHelper::my_log("user is not null 3" . print_r($user, true));
 			JGoogleHelper::my_log("on user login end" . print_r($results, true));
 		}
-        $app =  JFactory::getApplication();
-		if ($this->ItemId)
+		$app =  JFactory::getApplication();
+		$session = JFactory::getSession();
+		$redirecturi = $session->get('redirecturi', "");
+		/*if ($this->ItemId)
 			$app->redirect(JRoute::_('index.php?Itemid=' . $this->ItemId, false));
 		elseif ($app->getUserState( 'Itemid'))
 			$app->redirect(JRoute::_('index.php?Itemid=' . $app->getUserState( 'Itemid'), false));
 		else
-			$app->redirect(JRoute::_('index.php'), false);
+			$app->redirect(JRoute::_('index.php'), false);*/
+		if ($redirecturi) {
+			JGoogleHelper::my_log("on user login end" . $redirecturi);
+			$app->redirect($redirecturi, false);
+		}
 	}
 	/**
 	 * Method to log out a user.

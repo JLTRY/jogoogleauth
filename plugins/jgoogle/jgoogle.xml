@@ -8,7 +8,7 @@
 	<authorEmail>jltryoen@orange.fr</authorEmail>
 	<authorUrl>www.jltryoen.fr</authorUrl>
 	<version>1.0.0</version>
-	<description>JGoogle Plugin</description>	
+	<description>JGoogle Plugin</description>
 	<files>
 		<filename plugin="jgoogle">jgoogle.php</filename>
 	</files>
