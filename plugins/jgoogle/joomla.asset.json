@@ -1,0 +1,40 @@
+{
+  "$schema": "https://developer.joomla.org/schemas/json-schema/web_assets.json",
+  "name": "jgoogle",
+  "version": "1.0",
+  "description": "jgoogle is a plugin that allow to log with your google account",
+  "license": "GPL-2.0+",
+  "assets": [
+    {
+      "name": "plugin.jgoogle",
+      "type": "script",
+      "uri": "plugins/user/jgoogle/js/jgoogle.js",
+      "dependencies": [
+        "jquery",
+        "url.min"
+      ]
+    },
+    {
+      "name": "url.min",
+      "type": "script",
+      "uri": "plugins/user/jgoogle/js/url.min.js",
+      "dependencies": [
+      ]
+    },
+    {
+      "name": "plugin.jgoogle",
+      "type": "style",
+      "uri": "plugins/user/jgoogle/css/jgoogle.css",
+      "dependencies": [
+      ]
+    },
+    {
+      "name": "plugin.jgoogle",
+      "type": "preset",
+      "dependencies": [
+        "plugin.jgoogle#script",
+        "plugin.jgoogle#style"
+      ]
+    }
+  ]
+}

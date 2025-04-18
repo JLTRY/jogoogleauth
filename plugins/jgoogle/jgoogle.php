@@ -122,7 +122,7 @@ class plgUserJGoogle extends CMSPlugin implements SubscriberInterface
 				'id'				 => $randomId,
 				'data-webauthn-form' => $form,
 				//'image'				=> $image,
-				'class'			  => 'plg_google_login_button btn-info w-10',
+				'class'			  => 'plg_google_login_button btn-info w100',
 				//'onclick'			=> '
 			],
 			]);
