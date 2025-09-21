@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config>
+	<fieldset
+		name="params" addfieldpath="/administrator/components/com_jgoogle/fields/"
+		label="JGLOBAL_FIELDSET_DISPLAY_OPTIONS">
+		<field
+			name="clientid"
+			type="text"
+			maxlength="128"
+			size="64"
+			label="COM_JOGOOGLEAUTH_FIELD_CLIENTID"
+			description="COM_JOGOOGLEAUTH_FIELD_CLIENTID_DESC">
+		</field>
+		<field
+			name="clientsecret"
+			type="text"
+			maxlength="128"
+			size="64"
+			label="COM_JOGOOGLEAUTH_FIELD_CLIENTSECRET"
+			description="COM_JOGOOGLEAUTH_FIELD_CLIENTSECRET_DESC">
+		</field>
+		<field
+			name="redirecturi"
+			type="uri"
+			readonly="true"
+			default="index.php&#63;option&#61;com_jogoogleauth&#38;task&#61;user.auth"
+			size="64"
+			label="COM_JOGOOGLEAUTH_FIELD_REDIRECTURI"
+			description="COM_JOGOOGLEAUTH_FIELD_REDIRECTURI_DESC">
+		</field>
+		<field
+			name="secretpassword"
+			type="text"
+			label="COM_JOGOOGLEAUTH_FIELD_SECRETPASSWORD"
+			description="COM_JOGOOGLEAUTH_FIELD_SECRETPASSWORD_DESC">
+		</field>
+		<field
+				name="loginredirectchoice"
+				type="radio"
+				class="btn-group btn-group-yesno"
+				default="1"
+				label="COM_USERS_FIELD_LOGIN_REDIRECT_CHOICE_LABEL"
+				description="COM_USERS_FIELD_LOGIN_REDIRECT_CHOICE_DESC">
+					<option value="1">COM_USERS_FIELD_LOGIN_MENUITEM</option>
+					<option value="0">COM_USERS_FIELD_LOGIN_URL</option>
+			</field>
+			<field
+				name="login_redirect_url"
+				type="text"
+				label="JFIELD_LOGIN_REDIRECT_URL_LABEL"
+				description="JFIELD_LOGIN_REDIRECT_URL_DESC"
+				class="inputbox"
+
+				field="login_redirect_menuitem"
+				hint="COM_USERS_FIELD_LOGIN_REDIRECT_PLACEHOLDER"
+				message="COM_USERS_FIELD_LOGIN_REDIRECT_ERROR"
+				showon="loginredirectchoice:0"/>
+			<field
+				name="login_redirect_menuitem"
+				type="menuitem"
+				disable="separator,alias,heading,url"
+				label="COM_USERS_FIELD_LOGIN_REDIRECTMENU_LABEL"
+				description="COM_USERS_FIELD_LOGIN_REDIRECTMENU_DESC"
+				showon="loginredirectchoice:1">
+				<option value="">JDEFAULT</option>
+			</field>
+
+	</fieldset>
+	<fieldset
+		name="permissions"
+		label="JCONFIG_PERMISSIONS_LABEL"
+		description="JCONFIG_PERMISSIONS_DESC">
+		<field
+			name="rules"
+			type="rules"
+			label="JCONFIG_PERMISSIONS_LABEL"
+			class="inputbox"
+			validate="rules"
+			filter="rules"
+			component="com_jgoogle"
+			section="component"	/>
+	</fieldset>
+
+</config>

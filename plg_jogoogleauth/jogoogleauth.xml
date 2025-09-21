@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<extension type="plugin" group="user" method="upgrade">
+	<name>User - JoGoogleAuth</name>
+	<author>JL TRYOEN</author>
+	<creationDate>2023-08</creationDate>
+	<copyright>(C) 2023 JL TRYOEN</copyright>
+	<license>GNU General Public License version 2 or later; see LICENSE.txt</license>
+	<authorEmail>jltryoen@orange.fr</authorEmail>
+	<authorUrl>www.jltryoen.fr</authorUrl>
+	<version>1.0.0</version>
+	<description>JGoogle Plugin</description>
+	<namespace path="src">JLTRY\Plugin\User\JOGoogleAuth</namespace>
+	<files>
+		<folder plugin="jogoogleauth">services</folder>
+		<folder>src</folder>
+	</files>
+	<media destination="plg_jogoogleauth" folder="media">
+		<filename>joomla.asset.json</filename>
+		<folder>js</folder>
+		<folder>css</folder>
+	</media>
+</extension>

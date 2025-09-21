@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<extension type="package" version="4.0" method="upgrade">
+    <name>pkg_jogoogleauth</name>
+    <packagename>jogoogleauth</packagename>
+    <version>1.0.0</version>
+    <creationDate>August 11, 2025</creationDate>
+    <copyright>(C) 2025-2025 JL TRYOEN. All rights reserved.</copyright>
+    <license>https://www.gnu.org/licenses/gpl-3.0.html GNU/GPL</license>
+    <author>JL TRYOEN</author>
+    <authorEmail>jltryoen@orange.fr</authorEmail>
+    <authorUrl>https://github.com/JLTRY/pkg_jogoogleauth</authorUrl>
+    <packager>JL TRYOEN</packager>
+    <packagerurl>https://github.com/JLTRY/pkg_jogoogleauth</packagerurl>
+    <description>PKG_JOGOOGLEAUTH_DESCRIPTION</description>
+    <scriptfile>install.jogoogleauth.php</scriptfile>
+    <files folder="packages">
+        <file type="plugin" id="jogoogleauth" group="user">plg_jogoogleauth.zip</file>
+        <file type="module" id="jogoogleauth" >mod_jogoogleauth.zip</file>
+        <file type="component" id="com_jogoogleauth">com_jogoogleauth.zip</file>
+    </files>
+    <languages>
+        <language tag="en-GB">language/en-GB/en-GB.pkg_jogoogleauth.sys.ini</language>
+        <language tag="fr-FR">language/fr-FR/fr-FR.pkg_jogoogleauth.sys.ini</language>
+    </languages>
+
+    <updateservers>
+       <server type="extension" priority="1" name="JO's Facebook updates">https://raw.githubusercontent.com/JLTRY/jogoogleauth/master/pkg_jogoogleauth/update_pkg.xml</server>
+    </updateservers>
+
+</extension>

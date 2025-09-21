@@ -1,0 +1,40 @@
+{
+  "$schema": "https://developer.joomla.org/schemas/json-schema/web_assets.json",
+  "name": "jogoogleauth",
+  "version": "1.0.0",
+  "description": "jogoogleauth is a plugin that allow to log with your google account",
+  "license": "GPL-2.0+",
+  "assets": [
+    {
+      "name": "plugin.jogoogleauth",
+      "type": "script",
+      "uri": "plg_jogoogleauth/jogoogleauth.js",
+      "dependencies": [
+        "jquery",
+        "url.min"
+      ]
+    },
+    {
+      "name": "url.min",
+      "type": "script",
+      "uri": "plg_jogoogleauth/url.min.js",
+      "dependencies": [
+      ]
+    },
+    {
+      "name": "plugin.jogoogleauth",
+      "type": "style",
+      "uri": "plg_jogoogleauth/jgoogleauth.css",
+      "dependencies": [
+      ]
+    },
+    {
+      "name": "plugin.jogoogleauth",
+      "type": "preset",
+      "dependencies": [
+        "plugin.jogoogleauth#script",
+        "plugin.jogoogleauth#style"
+      ]
+    }
+  ]
+}
