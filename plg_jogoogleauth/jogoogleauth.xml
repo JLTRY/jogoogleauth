@@ -4,7 +4,7 @@
 	<author>JL TRYOEN</author>
 	<creationDate>2023-08</creationDate>
 	<copyright>(C) 2023 JL TRYOEN</copyright>
-	<license>GNU General Public License version 2 or later; see LICENSE.txt</license>
+	<license>GNU General Public License version 3 or later; see LICENSE.txt</license>
 	<authorEmail>jltryoen@orange.fr</authorEmail>
 	<authorUrl>www.jltryoen.fr</authorUrl>
 	<version>1.0.0</version>
@@ -13,6 +13,7 @@
 	<files>
 		<folder plugin="jogoogleauth">services</folder>
 		<folder>src</folder>
+		<folder>language</folder>
 	</files>
 	<media destination="plg_jogoogleauth" folder="media">
 		<filename>joomla.asset.json</filename>

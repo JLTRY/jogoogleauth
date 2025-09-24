@@ -51,7 +51,7 @@
 		</files>
 		<languages folder="admin/language">
         	<language tag="en-GB">en-GB/en-GB.com_jogoogleauth.ini</language>
-            <language tag="en-GB">en-GB/en-GB.com_jogoogleauth.sys.ini</language>
+            <language tag="fr-FR">fr-FR/fr-FR.com_jogoogleauth.sys.ini</language>
 		</languages>
 	</administration>
 </extension>

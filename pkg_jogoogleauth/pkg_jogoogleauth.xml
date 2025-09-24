@@ -5,7 +5,7 @@
     <version>1.0.0</version>
     <creationDate>August 11, 2025</creationDate>
     <copyright>(C) 2025-2025 JL TRYOEN. All rights reserved.</copyright>
-    <license>https://www.gnu.org/licenses/gpl-3.0.html GNU/GPL</license>
+    <license>GNU/GPLv3 http://www.gnu.org/licenses/gpl-3.0.html</license> 
     <author>JL TRYOEN</author>
     <authorEmail>jltryoen@orange.fr</authorEmail>
     <authorUrl>https://github.com/JLTRY/pkg_jogoogleauth</authorUrl>
@@ -14,8 +14,8 @@
     <description>PKG_JOGOOGLEAUTH_DESCRIPTION</description>
     <scriptfile>install.jogoogleauth.php</scriptfile>
     <files folder="packages">
-        <file type="plugin" id="jogoogleauth" group="user">plg_jogoogleauth.zip</file>
-        <file type="module" id="jogoogleauth" >mod_jogoogleauth.zip</file>
+        <file type="plugin" id="jogoogleauth" group="user" client="site">plg_jogoogleauth.zip</file>
+        <file type="module" id="jogoogleauth" client="site">mod_jogoogleauth.zip</file>
         <file type="component" id="com_jogoogleauth">com_jogoogleauth.zip</file>
     </files>
     <languages>

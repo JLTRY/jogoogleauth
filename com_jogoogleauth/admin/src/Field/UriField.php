@@ -1,23 +1,25 @@
 <?php
 /**
- * @package    JCoaching
- * @author     
- * @copyright  
- * @license    
+ * @package     Joomla.Administrator
+ * @subpackage  com_jogoogleauth
+ *
+ * @copyright   Copyright (C) 2005 - 2015 JL Tryoen, Inc. All rights reserved.
+ * @license     GNU General Public License version 3 or later; see LICENSE.txt
  */
+
+namespace JLTRY\Component\Jogoogleauth\Administrator\Field;
 defined('_JEXEC') or die();
-JLoader::import('libraries.joomla.form.fields.url', JPATH_SITE);
+use Joomla\CMS\Form\Field\UrlField;
+use Joomla\CMS\Uri\Uri;
 
-class JFormFieldURI extends JFormFieldUrl
+class UriField extends UrlField
 {
-	protected $type = 'uri';
-
-	public function getInput ()
-	{
-		$root = str_replace("http:", "https:", JURI::root());
-		$this->value = $root . $this->default;
-		$this->readonly = true;
-		return  parent::getInput();
-	}
-	
+    protected $type = 'uri';
+    public function getInput ()
+    {
+        $root = str_replace("http:", "https:", Uri::root());
+        $this->value = $root . $this->default;
+        $this->readonly = true;
+        return  parent::getInput();
+    }
 }

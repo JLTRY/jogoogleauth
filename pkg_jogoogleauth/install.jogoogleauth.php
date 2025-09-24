@@ -27,7 +27,7 @@ use Joomla\CMS\Language\Text;
  * @package Attachments
  */
 // phpcs:ignore
-class pkg_JoFacebookInstallerScript implements InstallerScriptInterface
+class pkg_JoGoogleAuthInstallerScript implements InstallerScriptInterface
 {
     /**
      * Attachments component install function

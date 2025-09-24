@@ -4,7 +4,7 @@
  * @subpackage  com_jogoogleauth
  *
  * @copyright   Copyright (C) 2016 - 2025 JL TRYOEN, Inc. All rights reserved.
- * @license     GNU General Public License version 2 or later; see LICENSE.txt
+ * @license     GNU General Public License version 3 or later; see LICENSE.txt
  */
 
 namespace JLTRY\Component\Jogoogleauth\Site\Controller;
@@ -22,11 +22,11 @@ defined('_JEXEC') or die('Restricted access');
  */
 class DisplayController extends BaseController
 {
-	/**
-	 * The default view for the display method.
-	 *
-	 * @var string
-	 * @since  1.6
-	 */
-	protected $default_view = 'JOGoogleAuth';
+    /**
+     * The default view for the display method.
+     *
+     * @var string
+     * @since  1.6
+     */
+    protected $default_view = 'JOGoogleAuth';
 }

@@ -4,7 +4,7 @@
  * @subpackage  mod_jgoogleauth
  *
  * @copyright   Copyright (C) 2005 - 2025 JL TRYOEN, Inc. All rights reserved.
- * @license     GNU General Public License version 2 or later; see LICENSE.txt
+ * @license     GNU General Public License version 3 or later; see LICENSE.txt
  */
 
 namespace JLTRY\Module\JOGoogleAuth\Site\Helper;
@@ -27,49 +27,49 @@ use Joomla\CMS\Language\Multilanguage;
 
 class JOGoogleAuthHelper
 {
-	/**
-	 * Retrieve the url where the user should be returned after logging in
-	 *
-	 * @param   \Joomla\Registry\Registry  $params  module parameters
-	 * @param   string                     $type    return type
-	 *
-	 * @return string
-	 */
-	public static function getReturnUrl($params, $type)
-	{
-		$app  = Factory::getApplication();
+    /**
+     * Retrieve the url where the user should be returned after logging in
+     *
+     * @param   \Joomla\Registry\Registry  $params  module parameters
+     * @param   string                     $type    return type
+     *
+     * @return string
+     */
+    public static function getReturnUrl($params, $type)
+    {
+        $app  = Factory::getApplication();
         $menu = $app->getMenu();
         if ($menu && $params) {
             $item = $app->getMenu()->getItem($params->get($type));
         }
-		// Stay on the same page
-		$url = Uri::getInstance()->toString();
+        // Stay on the same page
+        $url = Uri::getInstance()->toString();
 
-		if ($item)
-		{
-			$lang = '';
+        if ($item)
+        {
+            $lang = '';
 
-			if (LanguageMultilang::isEnabled() && $item->language !== '*')
-			{
-				$lang = '&lang=' . $item->language;
-			}
+            if (LanguageMultilang::isEnabled() && $item->language !== '*')
+            {
+                $lang = '&lang=' . $item->language;
+            }
 
-			$url = 'index.php?Itemid=' . $item->id . $lang;
-		}
+            $url = 'index.php?Itemid=' . $item->id . $lang;
+        }
 
-		return base64_encode($url);
-	}
+        return base64_encode($url);
+    }
 
-	/**
-	 * Returns the current users type
-	 *
-	 * @return string
-	 */
-	public static function getType()
-	{
-		$user = Factory::getUser();
+    /**
+     * Returns the current users type
+     *
+     * @return string
+     */
+    public static function getType()
+    {
+        $user = Factory::getApplication()->getIdentity();
 
-		return (!$user->get('guest')) ? 'logout' : 'login';
-	}
+        return (!$user->get('guest')) ? 'logout' : 'login';
+    }
 
 }

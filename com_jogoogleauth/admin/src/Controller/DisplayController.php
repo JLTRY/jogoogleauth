@@ -4,7 +4,7 @@
  * @subpackage  com_jogoogleauth
  *
  * @copyright   Copyright (C) 2005 - 2015 JL Tryoen, Inc. All rights reserved.
- * @license     GNU General Public License version 2 or later; see LICENSE.txt
+ * @license     GNU General Public License version 3 or later; see LICENSE.txt
  */
 
 namespace JLTRY\Component\Jogoogleauth\Administrator\Controller;
@@ -23,13 +23,13 @@ defined('_JEXEC') or die('Restricted access');
 class DisplayController extends BaseController
 {
 
-	/**
-	 * The default view.
-	 *
-	 * @var    string
-	 * @since  1.0.0
-	 */
-	protected $default_view = 'empty';
+    /**
+     * The default view.
+     *
+     * @var    string
+     * @since  1.0.0
+     */
+    protected $default_view = 'empty';
     public function display($cachable = false, $urlparams = false)
     {
         $input = $this->app->getInput();

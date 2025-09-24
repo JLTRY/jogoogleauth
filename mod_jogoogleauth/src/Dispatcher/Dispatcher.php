@@ -49,7 +49,7 @@ class Dispatcher extends AbstractModuleDispatcher implements HelperFactoryAwareI
         $type             = JOGoogleAuthHelper::getType();
         $return           = JOGoogleAuthHelper::getReturnUrl($params, $type);
         $layout           = $params->get('layout', 'default');
-        $user             = Factory::getUser();
+        $user             = Factory::getApplication()->getIdentity();
         // Logged users must load the logout sublayout
         if ($user->id != 0)
         {

@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <extension type="module" version="3.1.0" client="site" method="upgrade">
-	<name>JOGoogleAuth</name>
+	<name>MOD_JOGOOGLEAUTH</name>
 	<author>JL Tryoen</author>
 	<version>1.0.0</version>
-	<description>A simple JGoogle Authentification module.</description>
+	<creationDate>August 11, 2025</creationDate>
+	<description>MOD_JOGOOGLEAUTH_DESCRIPTION</description>
+	<copyright>Copyright Info</copyright>
+	<license>License Info</license>
+	<authorEmail>jltryoen@orange.fr</authorEmail>
+	<authorUrl>https://github.com/JLTRY/plg_jofacebook</authorUrl>
 	<namespace path="src">JLTRY\Module\JOGoogleAuth</namespace>
 	<files>
 		<folder module="mod_jogoogleauth">services</folder>
@@ -11,6 +16,7 @@
 		<filename>index.html</filename>	 
 		<folder>tmpl</folder>
 		<folder>src</folder>
+		<folder>language</folder>
 	</files>
 	<scriptfile>install.jogoogleauth.php</scriptfile>
 	<config>

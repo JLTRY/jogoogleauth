@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <config>
 	<fieldset
-		name="params" addfieldpath="/administrator/components/com_jgoogle/fields/"
+		name="params" addfieldprefix="JLTRY\Component\Jogoogleauth\Administrator\Field"
 		label="JGLOBAL_FIELDSET_DISPLAY_OPTIONS">
 		<field
 			name="clientid"
@@ -24,6 +24,7 @@
 			type="uri"
 			readonly="true"
 			default="index.php&#63;option&#61;com_jogoogleauth&#38;task&#61;user.auth"
+			relative="true"
 			size="64"
 			label="COM_JOGOOGLEAUTH_FIELD_REDIRECTURI"
 			description="COM_JOGOOGLEAUTH_FIELD_REDIRECTURI_DESC">

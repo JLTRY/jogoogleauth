@@ -4,7 +4,7 @@
  * @subpackage  com_jogoogleauth
  *
  * @copyright   Copyright (C) 2005 - 2015 JL Tryoen, Inc. All rights reserved.
- * @license     GNU General Public License version 2 or later; see LICENSE.txt
+ * @license     GNU General Public License version 3 or later; see LICENSE.txt
  */
 
 namespace JLTRY\Component\Jogoogleauth\Administrator\Controller;

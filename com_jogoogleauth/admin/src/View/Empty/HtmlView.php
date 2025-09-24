@@ -4,7 +4,7 @@
  * @subpackage  com_jogoogleauth
  *
  * @copyright   Copyright (C) 2005 - 2015 JL Tryoen, Inc. All rights reserved.
- * @license     GNU General Public License version 2 or later; see LICENSE.txt
+ * @license     GNU General Public License version 3 or later; see LICENSE.txt
  */
 
 namespace JLTRY\Component\Jogoogleauth\Administrator\View\Empty;
@@ -27,31 +27,31 @@ $language->load('joomla', JPATH_ADMINISTRATOR);
  */
 class HtmlView extends BaseHtmlView
 {
-	protected $form;
-	protected $item;
-	protected $script;
-	protected $canDo;
+    protected $form;
+    protected $item;
+    protected $script;
+    protected $canDo;
 
-	/**
-	 * Display the Calendar view
-	 *
-	 * @param   string  $tpl  The name of the template file to parse; automatically searches through the template paths.
-	 *
-	 * @return  void
-	 */
-	public function display($tpl = null)
-	{
-		$this->addToolBar();
+    /**
+     * Display the Calendar view
+     *
+     * @param   string  $tpl  The name of the template file to parse; automatically searches through the template paths.
+     *
+     * @return  void
+     */
+    public function display($tpl = null)
+    {
+        $this->addToolBar();
         $language = Factory::getLanguage();
-		$language->load('com_jogoogleauth.sys', JPATH_ADMINISTRATOR, null, true);
-		// Display the template
-		parent::display($tpl);
-		
-	}
-	
-	protected function addToolBar()
-	{
-			ToolBarHelper::divider();
-			ToolBarHelper::preferences('com_jogoogleauth');
-	}
+        $language->load('com_jogoogleauth.sys', JPATH_ADMINISTRATOR, null, true);
+        // Display the template
+        parent::display($tpl);
+        
+    }
+    
+    protected function addToolBar()
+    {
+            ToolBarHelper::divider();
+            ToolBarHelper::preferences('com_jogoogleauth');
+    }
 }
