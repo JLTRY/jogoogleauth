@@ -11,15 +11,15 @@
 namespace JLTRY\Plugin\User\JOGoogleAuth\Extension;
 use Joomla\CMS\Event\CoreEventAware;
 use Joomla\CMS\Factory;
-use Joomla\CMS\Log\Log;
 use Joomla\CMS\HTML\HTMLHelper;
-use Joomla\CMS\User\UserHelper;
+use Joomla\CMS\Log\Log;
 use Joomla\CMS\Plugin\CMSPlugin;
-use Joomla\CMS\Uri\Uri;
-use Joomla\Event\DispatcherInterface;
-use Joomla\Event\SubscriberInterface;
-use Joomla\Event\Event;
 use Joomla\CMS\Router\Route;
+use Joomla\CMS\Uri\Uri;
+use Joomla\CMS\User\UserHelper;
+use Joomla\Event\DispatcherInterface;
+use Joomla\Event\Event;
+use Joomla\Event\SubscriberInterface;
 
 
 
@@ -74,12 +74,27 @@ class JOGoogleAuth extends CMSPlugin implements SubscriberInterface
 
         // Set the "don't load again" flag
         $this->injectedCSSandJS = true;
-        $document = Factory::getDocument();
-        $document->addScriptDeclaration('var base = \''.URI::base().'\'');
+        $params = $this->params;
+        $choice = $params->get('loginredirectchoice', 0);
+        $itemurl = $params->get('login_redirect_url', '');
+        $itemid = $params->get('login_redirect_menuitem', '');
+        $redirecturi = URI::base();
+        if (($choice == 1) && ($itemid != '')) {
+            $app = Factory::getApplication();
+            $sitemenu = $app->getMenu(); 
+            $menuitem = $sitemenu->getItem($itemid);
+            $redirecturi = Uri::root() . $menuitem->link;
+        } 
+        if (($choice == 0) && ($itemid != '')) {
+           $redirecturi = Uri::root() . $itemurl;
+        }
         /** @var Joomla\CMS\WebAsset\WebAssetManager $wa */
-        $wa = $document->getWebAssetManager();
+        $wa = Factory::getApplication()->getDocument()->getWebAssetManager();
         $wa->getRegistry()->addRegistryFile('media/plg_jogoogleauth/joomla.asset.json');
         $wa->usePreset("plugin.jogoogleauth");
+        $wa->addInlineScript('var base = \''. Uri::base() .'\' ; var redirecturi = \''. $redirecturi .'\'',
+                            ['position' => 'before'], [], ['plugin.jogoogleauth']);
+        
     }
     
     // Add JGoogle button

@@ -47,7 +47,7 @@ return new class () implements ServiceProviderInterface {
                     $plugin->setApplication($app);
                     // Show an error message if the plugin is not available
                     $lang = Factory::getApplication()->getLanguage();
-                    $lang->load('plg_content_jogoogleauth', JPATH_PLUGINS . '/user/jogoogleauth');
+                    $lang->load('plg_user_jogoogleauth', JPATH_PLUGINS . '/user/jogoogleauth');
                     return $plugin;
                 }
             );

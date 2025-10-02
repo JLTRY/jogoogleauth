@@ -46,7 +46,6 @@ class UserController extends BaseController
         $this->log = true;
         $this->log("construct: JGoogleControllerUser:". print_r($config, true));
         $app = Factory::getApplication();
-        $ItemId = $app->input->getInt('Itemid', null);
         $return = $app->input->getString('return', '');
         $session = Factory::getSession();
         if ($return) {
@@ -62,22 +61,15 @@ class UserController extends BaseController
                                array('state'=>'jauth',
                               'task'=> $app->input->get('task', 'login'),
                               'access_type'=>'offline'));
-        jimport('joomla.application.component.helper'); // Import component helper library
         $params = $app->getParams('com_jogoogleauth');
-        $this->log("params:". print_r($params, true));
-        $this->log("itemid2 set:". print_r($this->ItemIds, true));
-        $this->ItemId = $params->get('login_redirect_menuitem', '');
-        $this->log("itemid2:". print_r($this->ItemIds, true));
-        if (empty($this->ItemId))
-            $this->ItemId = $ItemId;
-        $oauth_client->setOption('clientid',	$params->get('clientid',''));
+        $oauth_client->setOption('clientid', $params->get('clientid',''));
         $oauth_client->setOption('clientsecret', $params->get('clientsecret',''));
         $oauth_client->setOption('redirecturi', $params->get('redirecturi',''));// . 'return=' . $return);
         $oauth_client->setOption('authurl','https://accounts.google.com/o/oauth2/v2/auth');
         $oauth_client->setOption('tokenurl','https://www.googleapis.com/oauth2/v4/token');
         $this->log("construct:end before oauth_client" . $this->ItemId);
         $this->oauth_client = $oauth_client; 
-        $this->log("construct:end after oauth_client" . $this->ItemId);
+        $this->log("construct:end after oauth_client:" .  $oauth_client->getOption('redirecturi'));
         parent::__construct($config);
         $this->log("construct:end" . $this->ItemId);
     }
@@ -105,7 +97,12 @@ class UserController extends BaseController
         $app->setUserState( 'Itemid', $this->ItemId);
         JOGoogleAuthHelper::Log("userstate" . $this->ItemId);
         JOGoogleAuthHelper::Log("oauth_client" . print_r(get_class($this->oauth_client), true));
-        $this->oauth_client->authenticate();
+        try {
+            $this->oauth_client->authenticate();
+        }
+        catch (\InvalidArgumentException $ex) {
+            $app->enqueueMessage(sprintf("Error: %s<br> Please fill parameters for component", $ex->getMessage()), 'error');
+        }
         JOGoogleAuthHelper::Log("authentificate end");
     }
     
@@ -114,6 +111,8 @@ class UserController extends BaseController
     {
         JOGoogleAuthHelper::Log("google auth");
         $this->oauth_client->setOption('sendheaders',false);
+        //sleep to avoid issue with OVH
+        sleep(3);
         $this->oauth_client->authenticate();
         if ($this->oauth_client->isAuthenticated())
         {
@@ -144,24 +143,27 @@ class UserController extends BaseController
             if ($user == null) {
                 JOGoogleAuthHelper::Log("registerUSer" . print_r($results, true));
                 $user = JOGoogleAuthHelper::registerUser((array)$response);
-                $user = JOGoogleAuthHelper::sendregisteredUserMail((array)$response);
+                //$user = JOGoogleAuthHelper::sendregisteredUserMail((array)$response);
             }
             else {
                 JOGoogleAuthHelper::Log("user is not null 1" . print_r($user, true));
             }
             $user =  JOGoogleAuthHelper::getUser((array)$response);
             JOGoogleAuthHelper::Log("user is not null 2" . print_r($user, true));
-            $results = $app->login((array)$response, $options);
-            $user =  JOGoogleAuthHelper::getUser((array)$response);
+            //$results = $app->login((array)$response, $options);
+            //$user =  JOGoogleAuthHelper::getUser((array)$response);
+            $app     = Factory::getApplication();
+            $session = Factory::getSession();
+            $redirecturi = $session->get('redirecturi',"");
+            //see Jokovlog implementation
+            $session->fork();
+            $session->set('user', $user);
             JOGoogleAuthHelper::Log("user is not null 3" . print_r($user, true));
-            JOGoogleAuthHelper::Log("on user login end" . print_r($results, true));
-        }
-        $app =  Factory::getApplication();
-        $session = Factory::getSession();
-        $redirecturi = $session->get('redirecturi', "");
-        if ($redirecturi) {
-            JOGoogleAuthHelper::Log("on user login end" . $redirecturi);
-            $app->redirect($redirecturi, false);
+            JOGoogleAuthHelper::Log("on user login end");
+            if ($redirecturi) {
+                JOGoogleAuthHelper::Log("on user login end redirect:" . $redirecturi);
+                $app->redirect($redirecturi, false);
+            }
         }
     }
     /**
