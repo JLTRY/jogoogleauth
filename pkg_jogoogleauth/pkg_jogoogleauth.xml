@@ -8,9 +8,9 @@
     <license>GNU/GPLv3 http://www.gnu.org/licenses/gpl-3.0.html</license> 
     <author>JL TRYOEN</author>
     <authorEmail>jltryoen@orange.fr</authorEmail>
-    <authorUrl>https://github.com/JLTRY/pkg_jogoogleauth</authorUrl>
+    <authorUrl>https://github.com/JLTRY/jogoogleauth</authorUrl>
     <packager>JL TRYOEN</packager>
-    <packagerurl>https://github.com/JLTRY/pkg_jogoogleauth</packagerurl>
+    <packagerurl>https://github.com/JLTRY/jogoogleauth</packagerurl>
     <description>PKG_JOGOOGLEAUTH_DESCRIPTION</description>
     <scriptfile>install.jogoogleauth.php</scriptfile>
     <files folder="packages">
@@ -24,7 +24,7 @@
     </languages>
 
     <updateservers>
-       <server type="extension" priority="1" name="JO's Facebook updates">https://raw.githubusercontent.com/JLTRY/jogoogleauth/master/pkg_jogoogleauth/update_pkg.xml</server>
+       <server type="extension" priority="1" name="JO's Google auth updates">https://raw.githubusercontent.com/JLTRY/jogoogleauth/master/pkg_jogoogleauth/update_pkg.xml</server>
     </updateservers>
 
 </extension>
