@@ -8,7 +8,7 @@
     {
       "name": "plugin.jogoogleauth",
       "type": "script",
-      "uri": "plg_jogoogleauth/jogoogleauth.js",
+      "uri": "plg_user_jogoogleauth/jogoogleauth.js",
       "dependencies": [
         "jquery",
         "url.min"
@@ -17,14 +17,14 @@
     {
       "name": "url.min",
       "type": "script",
-      "uri": "plg_jogoogleauth/url.min.js",
+      "uri": "plg_user_jogoogleauth/url.min.js",
       "dependencies": [
       ]
     },
     {
       "name": "plugin.jogoogleauth",
       "type": "style",
-      "uri": "plg_jogoogleauth/jgoogleauth.css",
+      "uri": "plg_user_jogoogleauth/jgoogleauth.css",
       "dependencies": [
       ]
     },

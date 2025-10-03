@@ -78,7 +78,7 @@ class JOGoogleAuth extends CMSPlugin implements SubscriberInterface
         $choice = $params->get('loginredirectchoice', 0);
         $itemurl = $params->get('login_redirect_url', '');
         $itemid = $params->get('login_redirect_menuitem', '');
-        $redirecturi = URI::base();
+        $redirecturi = '';
         if (($choice == 1) && ($itemid != '')) {
             $app = Factory::getApplication();
             $sitemenu = $app->getMenu(); 
@@ -90,7 +90,7 @@ class JOGoogleAuth extends CMSPlugin implements SubscriberInterface
         }
         /** @var Joomla\CMS\WebAsset\WebAssetManager $wa */
         $wa = Factory::getApplication()->getDocument()->getWebAssetManager();
-        $wa->getRegistry()->addRegistryFile('media/plg_jogoogleauth/joomla.asset.json');
+        $wa->getRegistry()->addRegistryFile('media/plg_user_jogoogleauth/joomla.asset.json');
         $wa->usePreset("plugin.jogoogleauth");
         $wa->addInlineScript('var base = \''. Uri::base() .'\' ; var redirecturi = \''. $redirecturi .'\'',
                             ['position' => 'before'], [], ['plugin.jogoogleauth']);
@@ -123,15 +123,23 @@ class JOGoogleAuth extends CMSPlugin implements SubscriberInterface
         $randomId = 'plg_user_jgoggle-' .
             UserHelper::genRandomPassword(12) . '-' . UserHelper::genRandomPassword(8);
 
+        $image = HTMLHelper::_('image', 'plg_user_jogoogleauth/Google__G__logo.svg', '', '', true, true);
+        // If you can't find the image then skip it
+        $image = $image ? JPATH_ROOT . substr($image, \strlen(Uri::root(true))) : '';
+        // Extract image if it exists
+        $image = file_exists($image) ? file_get_contents($image) : '';
+
         $this->returnFromEvent($event, [
             [
                 'label'			  => 'Google',
                 'tooltip'			=> 'Google login',
                 'id'				 => $randomId,
                 'data-webauthn-form' => $form,
-                'class'			  => 'plg_google_login_button btn-info w100',
+                // Extract image if it exists
+                'svg'                => $image,
+                'class'			  => 'plg_google_login_button btn-info w100'
             ],
-            ]);
+        ]);
     }
     
     /**

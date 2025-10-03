@@ -1,1 +1,57 @@
-../jogoogleauth.xml
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="component" version="5.0" method="upgrade">
+	<name>com_jogoogleauth</name>
+	<!-- The following elements are optional and free of formatting constraints -->
+	<creationDate>October  3, 2025</creationDate>
+	<author>JL Tryoen</author>
+	<authorEmail>jltryoen@orange.fr</authorEmail>
+	<authorUrl>http://www.jltryoen.fr</authorUrl>
+	<copyright>Copyright Info</copyright>
+	<license>License Info</license>
+	<!--  The version string is recorded in the components table -->
+	<version>1.0.1</version>
+	<!-- The description is optional and defaults to the name -->
+	<description>COM_JOGOOGLEAUTH_DESCRIPTION</description>
+	<install> <!-- Runs on install -->
+	</install>
+	<uninstall> <!-- Runs on uninstall -->
+
+	</uninstall>
+	<update> <!-- Runs on update; New since J2.5 -->
+
+	</update>
+	<namespace path="src">JLTRY\Component\Jogoogleauth</namespace>
+	<!-- Site Main File Copy Section -->
+	<!-- Note the folder attribute: This attribute describes the folder
+		to copy FROM in the package to install therefore files copied
+	in this section are copied from /site/ in the package -->
+	<files folder="site">
+		<filename>index.html</filename>
+		<folder>src</folder>
+		<folder>tmpl</folder>
+		<folder>services</folder>
+	</files>
+
+
+	<administration>
+		<!-- Administration Menu Section -->
+		<menu link='index.php?option=com_jogoogleauth' >COM_JOGOOGLEAUTH_MENU</menu>
+		<!-- Administration Main File Copy Section -->
+		<!-- Note the folder attribute: This attribute describes the folder
+			to copy FROM in the package to install therefore files copied
+		in this section are copied from /admin/ in the package -->
+		<files folder="admin">
+			<!-- Admin Main File Copy Section -->
+			<filename>index.html</filename>
+			<filename>config.xml</filename>
+			<filename>access.xml</filename>
+			<folder>src</folder>
+			<folder>services</folder>
+			<folder>tmpl</folder>
+		</files>
+		<languages folder="admin/language">
+        	<language tag="en-GB">en-GB/en-GB.com_jogoogleauth.ini</language>
+            <language tag="fr-FR">fr-FR/fr-FR.com_jogoogleauth.sys.ini</language>
+		</languages>
+	</administration>
+</extension>

@@ -2,8 +2,8 @@
 <extension type="package" version="4.0" method="upgrade">
     <name>pkg_jogoogleauth</name>
     <packagename>jogoogleauth</packagename>
-    <version>1.0.0</version>
-    <creationDate>August 11, 2025</creationDate>
+    <version>1.0.1</version>
+    <creationDate>October  3, 2025</creationDate>
     <copyright>(C) 2025-2025 JL TRYOEN. All rights reserved.</copyright>
     <license>GNU/GPLv3 http://www.gnu.org/licenses/gpl-3.0.html</license> 
     <author>JL TRYOEN</author>

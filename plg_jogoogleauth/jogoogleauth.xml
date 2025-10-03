@@ -2,12 +2,12 @@
 <extension type="plugin" group="user" method="upgrade">
 	<name>PLG_JOGOOGLEAUTH</name>
 	<author>JL TRYOEN</author>
-	<creationDate>2023-08</creationDate>
+	<creationDate>October  3, 2025</creationDate>
 	<copyright>(C) 2023 JL TRYOEN</copyright>
 	<license>GNU General Public License version 3 or later; see LICENSE.txt</license>
 	<authorEmail>jltryoen@orange.fr</authorEmail>
 	<authorUrl>www.jltryoen.fr</authorUrl>
-	<version>1.0.0</version>
+	<version>1.0.1</version>
 	<description>PLG_JOGOOGLEAUTH_DESCRIPTION</description>
 	<namespace path="src">JLTRY\Plugin\User\JOGoogleAuth</namespace>
 	<files>
@@ -15,10 +15,11 @@
 		<folder>src</folder>
 		<folder>language</folder>
 	</files>
-	<media destination="plg_jogoogleauth" folder="media">
+	<media destination="plg_user_jogoogleauth" folder="media">
 		<filename>joomla.asset.json</filename>
 		<folder>js</folder>
 		<folder>css</folder>
+		<folder>images</folder>
 	</media>
 	<config>
 		<fields name="params">
@@ -27,7 +28,7 @@
 					name="loginredirectchoice"
 					type="radio"
 					class="btn-group btn-group-yesno"
-					default="1"
+					default="2"
 					label="PLG_JOGOOGLEAUTH_FIELD_LOGIN_REDIRECT_CHOICE_LABEL"
 					description="PLG_JOGOOGLEAUTH_FIELD_LOGIN_REDIRECT_CHOICE_DESC">
 						<option value="1">PLG_JOGOOGLEAUTH_FIELD_LOGIN_MENUITEM</option>

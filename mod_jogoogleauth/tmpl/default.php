@@ -23,7 +23,7 @@ HTMLHelper::_('bootstrap.tooltip');
     <div class="userdata">
         <div id="form-login-submit" class="control-group">
             <div class="controls">
-                <button type="submit" tabindex="0" name="Submit" class="btn btn-primary"><?php echo Text::_('JLOGIN') ?></button>
+                <button type="submit" tabindex="0" name="Submit" class="btn btn-info"><img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg"><?php echo Text::_('JLOGIN') ?></button>
             </div>
         </div>
         <input type="hidden" name="option" value="com_jogoogleauth" />
