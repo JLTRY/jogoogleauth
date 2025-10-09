@@ -2,6 +2,8 @@ VERSION = "1.0.1"
 VERSION2 = $(shell echo $(VERSION)|sed 's/ /-/g')
 PKG=pkg_jogoogleauth
 ZIPFILE = $(PKG)-$(VERSION2).zip
+UPDATEFILE = $(PACKAGE)-update.xml
+
 mkfile_path := $(abspath $(lastword $(MAKEFILE_LIST)))
 mkfile_dir := $(dir $(mkfile_path))
 
@@ -51,7 +53,7 @@ revertversions:
 
 fixsha:
 	@echo "Updating update xml files with checksums"
-	./fixsha.sh $(ZIPFILE) 'update_pkg.xml'
+	@(cd $(ROOT);./fixsha.sh $(ZIPFILE) $(UPDATEFILE))
 
 fixcopyrights:
 	@find . \( -name '*.php' -o -name '*.ini' -o -name '*.xml' \) -exec ./fixcopyrights.sh {} \;

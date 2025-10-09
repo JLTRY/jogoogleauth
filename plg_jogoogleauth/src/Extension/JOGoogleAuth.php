@@ -2,9 +2,10 @@
 
 /**
  * @package	 Joomla.Plugin
- * @subpackage  System.Webauthn
+ * @subpackage  User.JoGoogleAuth
  *
- * @copyright   (C) 2025 JL TRYOEN, Inc. <https://www.joomla.org>
+ * @copyright   (C) 2005 - 2013 Open Source Matters, Inc. All rights reserved.
+                (C) 2025 JL TRYOEN <https://www.jltryoen.fr>
  * @license	 GNU General Public License version 3 or later; see LICENSE.txt
  */
 
@@ -20,6 +21,7 @@ use Joomla\CMS\User\UserHelper;
 use Joomla\Event\DispatcherInterface;
 use Joomla\Event\Event;
 use Joomla\Event\SubscriberInterface;
+
 
 
 
