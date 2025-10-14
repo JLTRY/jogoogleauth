@@ -5,8 +5,8 @@
 	<version>1.0.1</version>
 	<creationDate>October  3, 2025</creationDate>
 	<description>MOD_JOGOOGLEAUTH_DESCRIPTION</description>
-	<copyright>Copyright Info</copyright>
-	<license>License Info</license>
+	<copyright>Copyright (C) 2025 JL TRYOEN. All rights reserved.</copyright>
+	<license>http://www.gnu.org/licenses/gpl-3.0.html GNU/GPL</license>
 	<authorEmail>jltryoen@orange.fr</authorEmail>
 	<authorUrl>https://github.com/JLTRY/plg_jofacebook</authorUrl>
 	<namespace path="src">JLTRY\Module\JOGoogleAuth</namespace>

@@ -6,8 +6,8 @@
 	<author>JL Tryoen</author>
 	<authorEmail>jltryoen@orange.fr</authorEmail>
 	<authorUrl>http://www.jltryoen.fr</authorUrl>
-	<copyright>Copyright Info</copyright>
-	<license>License Info</license>
+	<copyright>Copyright (C) 2025 JL TRYOEN. All rights reserved.</copyright>
+	<license>http://www.gnu.org/licenses/gpl-3.0.html GNU/GPL</license>
 	<!--  The version string is recorded in the components table -->
 	<version>1.0.1</version>
 	<!-- The description is optional and defaults to the name -->
