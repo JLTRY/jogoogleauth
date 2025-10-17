@@ -44,6 +44,7 @@ class UserController extends BaseController
     public function __construct($config = array())
     {
         $this->log = true;
+        JOGoogleAuthHelper::addLogger();
         $this->log("construct: JGoogleControllerUser:". print_r($config, true));
         $app = Factory::getApplication();
         $return = $app->input->getString('return', '');

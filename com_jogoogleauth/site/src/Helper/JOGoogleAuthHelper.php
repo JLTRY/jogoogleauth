@@ -8,12 +8,13 @@
  */
 
 namespace JLTRY\Component\Jogoogleauth\Site\Helper;
-use Joomla\CMS\User\UserHelper;
-use Joomla\CMS\User\User;
 use Joomla\CMS\Component\ComponentHelper;
-use Joomla\CMS\Language\Text;
 use Joomla\CMS\Date\Date;
 use Joomla\CMS\Factory;
+use Joomla\CMS\Language\Text;
+use Joomla\CMS\Log\Log;
+use Joomla\CMS\User\User;
+use Joomla\CMS\User\UserHelper;
 
 // phpcs:disable PSR1.Files.SideEffects
 \defined('_JEXEC') or die;
@@ -105,15 +106,24 @@ abstract class JOGoogleAuthHelper
         // Path/folder does not exist
         return false;
     }
-    
-    public static function Log($msg){
-        $LOGFILE = dirname(__FILE__) . "/../log/log.oauth.txt";
-        $dir = dirname(__FILE__) . "/../log";
-        if (!JOGoogleAuthHelper::folder_exist($dir))
-            mkdir($dir);
-        $fp = fopen($LOGFILE, "a");
-        fwrite($fp, "[OAUTH] " . date("H:i:s").":" .  $msg ."\n");
-        fclose($fp);
+
+    public static function addLogger() {
+        Log::addLogger(
+            array(
+             // Sets file name.
+             'text_file' => 'com_jogoogleauth.php',
+             // Sets the format of each line.
+             'text_entry_format' => '{DATETIME} {PRIORITY} {MESSAGE}'
+            ),
+            // Sets all but DEBUG log level messages to be sent to the file.
+            Log::ALL,
+            // The log category which should be recorded in this file.
+            array('com_jogoogleauth')
+        );
+    }
+
+    public static function Log($msg, $type = Log::WARNING ){
+        Log::add($msg, $type, 'com_jogoogleauth');
     }
 }
 
