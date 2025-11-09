@@ -118,7 +118,8 @@ class UserController extends BaseController
         if ($this->oauth_client->isAuthenticated())
         {
             JOGoogleAuthHelper::Log("isauthentificated");
-            $this->credentials = $credentials = json_decode($this->oauth_client->query('https://www.googleapis.com/oauth2/v1/userinfo?alt=json')->body,true);
+            $this->credentials = $credentials = 
+                json_decode($this->oauth_client->query('https://www.googleapis.com/oauth2/v1/userinfo?alt=json')->getBody(),true);
             $response = new \stdClass();
             // OK, the credentials are authenticated and user is authorised.  Let's fire the onLogin event.
             $app = Factory::getApplication();
@@ -163,7 +164,7 @@ class UserController extends BaseController
             JOGoogleAuthHelper::Log("on user login end");
             if ($redirecturi) {
                 JOGoogleAuthHelper::Log("on user login end redirect:" . $redirecturi);
-                $app->redirect($redirecturi, false);
+                $app->redirect($redirecturi, 200);
             }
         }
     }
