@@ -1,6 +1,6 @@
 VERSION = "1.0.1"
 VERSION2 = $(shell echo $(VERSION)|sed 's/ /-/g')
-PKG=pkg_jogoogleauth
+PACKAGE=pkg_jogoogleauth
 ZIPFILE = $(PKG)-$(VERSION2).zip
 UPDATEFILE = update_pkg.xml
 ROOT = $(shell pwd)
@@ -37,8 +37,8 @@ parts: $(ZIPS)
 $(ZIPFILE): $(ZIPS)
 	@echo "-------------------------------------------------------"
 	@echo "Creating extension zip file: $(ZIPFILE)"
-	@mv $(INSTALLS:=.zip) $(PKG)/packages/
-	@(cd  $(PKG); zip -r ../$@ * $(ZIPIGNORES))
+	@mv $(INSTALLS:=.zip) $(PACKAGE)/packages/
+	@(cd $(PACKAGE); zip -r ../$@ * $(ZIPIGNORES))
 	@echo "-------------------------------------------------------"
 	@echo "Finished creating package $(ZIPFILE)."
 
