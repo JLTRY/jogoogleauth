@@ -24,7 +24,7 @@
     </languages>
 
     <updateservers>
-       <server type="extension" priority="1" name="JO's Google auth updates">https://raw.githubusercontent.com/JLTRY/jogallery/master/joomla/pkg_jogoogleauth/update_pkg.xml</server>
+       <server type="extension" priority="1" name="JO's Google auth updates">https://raw.githubusercontent.com/JLTRY/jogoogleauth/master/pkg_jogoogleauth/update_pkg.xml</server>
     </updateservers>
 
 </extension>
