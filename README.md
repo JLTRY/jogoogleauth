@@ -17,6 +17,7 @@ The package includes a component (helper), one plugin and one module
 
 ## 2025-09-23 version 1.0.2
 
+adapt to Joomla 6.x
 Update server address
 
 ## 2025-09-23 version 1.0.0
