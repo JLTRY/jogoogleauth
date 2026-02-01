@@ -1,9 +1,9 @@
 <?php
 
 /**
- * Jofacebook package installation script
+ * JoStrava module installation script
  *
- * @package jofacebook
+ * @package jogoogleauth
   *
  * @author JL TRYOEN
  * @copyright Copyright (C) 2007-2025 JL TRYOEN

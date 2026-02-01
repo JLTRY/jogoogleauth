@@ -8,8 +8,8 @@
 	<copyright>Copyright (C) 2025 JL TRYOEN. All rights reserved.</copyright>
 	<license>http://www.gnu.org/licenses/gpl-3.0.html GNU/GPL</license>
 	<authorEmail>jltryoen@orange.fr</authorEmail>
-	<authorUrl>https://github.com/JLTRY/plg_jofacebook</authorUrl>
-	<namespace path="src">JLTRY\Module\JOGoogleAuth</namespace>
+	<authorUrl>https://github.com/JLTRY/jogoogleauth</authorUrl>
+	<namespace path="src">JLTRY\Module\JOStrava</namespace>
 	<files>
 		<folder module="mod_jogoogleauth">services</folder>
 		<filename>mod_jogoogleauth.xml</filename>
