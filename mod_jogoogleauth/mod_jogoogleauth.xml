@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<extension type="module" version="1.0.2" client="site" method="upgrade">
+<extension type="module" version="1.0.3" client="site" method="upgrade">
 	<name>MOD_JOGOOGLEAUTH</name>
 	<author>JL Tryoen</author>
-	<version>1.0.2</version>
-	<creationDate>October  3, 2025</creationDate>
+	<version>1.0.3</version>
+	<creationDate>February 10, 2026</creationDate>
 	<description>MOD_JOGOOGLEAUTH_DESCRIPTION</description>
 	<copyright>Copyright (C) 2025 JL TRYOEN. All rights reserved.</copyright>
 	<license>http://www.gnu.org/licenses/gpl-3.0.html GNU/GPL</license>
 	<authorEmail>jltryoen@orange.fr</authorEmail>
 	<authorUrl>https://github.com/JLTRY/jogoogleauth</authorUrl>
-	<namespace path="src">JLTRY\Module\JOStrava</namespace>
+	<namespace path="src">JLTRY\Module\JOGoogleAuth</namespace>
 	<files>
 		<folder module="mod_jogoogleauth">services</folder>
 		<filename>mod_jogoogleauth.xml</filename>

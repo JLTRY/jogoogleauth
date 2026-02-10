@@ -2,12 +2,12 @@
 <extension type="plugin" group="user" method="upgrade">
 	<name>PLG_JOGOOGLEAUTH</name>
 	<author>JL TRYOEN</author>
-	<creationDate>October  3, 2025</creationDate>
+	<creationDate>February 10, 2026</creationDate>
 	<copyright>(C) 2023 JL TRYOEN</copyright>
 	<license>GNU General Public License version 3 or later; see LICENSE.txt</license>
 	<authorEmail>jltryoen@orange.fr</authorEmail>
 	<authorUrl>www.jltryoen.fr</authorUrl>
-	<version>1.0.2</version>
+	<version>1.0.3</version>
 	<description>PLG_JOGOOGLEAUTH_DESCRIPTION</description>
 	<namespace path="src">JLTRY\Plugin\User\JOGoogleAuth</namespace>
 	<files>

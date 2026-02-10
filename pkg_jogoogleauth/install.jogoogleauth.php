@@ -6,7 +6,7 @@
  * @package jofacebook
   *
  * @author JL TRYOEN
- * @copyright Copyright (C) 2007-2025 JL TRYOEN
+ * @copyright Copyright (C) 2007-2026 JL TRYOEN
  * @license https://www.gnu.org/licenses/gpl-3.0.html GNU/GPL
  * @link https://github.com/JLTRY/plg_jofacebook
  */

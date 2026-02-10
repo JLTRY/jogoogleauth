@@ -48,15 +48,12 @@ class JOGoogleAuthHelper
         if ($item)
         {
             $lang = '';
-
             if (LanguageMultilang::isEnabled() && $item->language !== '*')
             {
                 $lang = '&lang=' . $item->language;
             }
-
             $url = 'index.php?Itemid=' . $item->id . $lang;
         }
-
         return base64_encode($url);
     }
 
@@ -68,7 +65,6 @@ class JOGoogleAuthHelper
     public static function getType()
     {
         $user = Factory::getApplication()->getIdentity();
-
         return (!$user->get('guest')) ? 'logout' : 'login';
     }
 

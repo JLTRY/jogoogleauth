@@ -1,12 +1,12 @@
 <?php
 
 /**
- * JoStrava module installation script
+ * JO's Google Auth module installation script
  *
  * @package jogoogleauth
   *
  * @author JL TRYOEN
- * @copyright Copyright (C) 2007-2025 JL TRYOEN
+ * @copyright Copyright (C) 2007-2026 JL TRYOEN
  * @license https://www.gnu.org/licenses/gpl-3.0.html GNU/GPL
  * @link https://github.com/JLTRY/plg_jofacebook
  */

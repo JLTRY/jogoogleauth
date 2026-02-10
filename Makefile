@@ -1,7 +1,6 @@
-VERSION = "1.0.2"
-VERSION2 = $(shell echo $(VERSION)|sed 's/ /-/g')
+VERSION = "1.0.3"
 PACKAGE=pkg_jogoogleauth
-ZIPFILE = $(PACKAGE)-$(VERSION2).zip
+ZIPFILE = $(PACKAGE)-$(VERSION).zip
 UPDATEFILE = update_pkg.xml
 ROOT = $(shell pwd)
 mkfile_path := $(abspath $(lastword $(MAKEFILE_LIST)))

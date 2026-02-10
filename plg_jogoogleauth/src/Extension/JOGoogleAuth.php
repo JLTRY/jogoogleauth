@@ -87,7 +87,7 @@ class JOGoogleAuth extends CMSPlugin implements SubscriberInterface
             $menuitem = $sitemenu->getItem($itemid);
             $redirecturi = Uri::root() . $menuitem->link;
         } 
-        if (($choice == 0) && ($itemid != '')) {
+        if (($choice == 0) && ($itemurl != '')) {
            $redirecturi = Uri::root() . $itemurl;
         }
         /** @var Joomla\CMS\WebAsset\WebAssetManager $wa */
@@ -115,8 +115,8 @@ class JOGoogleAuth extends CMSPlugin implements SubscriberInterface
     {
         /** @var string $form The HTML ID of the form we are enclosed in */
         
-        $form = $event->getArguments();
-
+        $arguments = array_values($event->getArguments());
+        $formId = $arguments[0] ?? '';
 
         // Load necessary CSS and Javascript files
         $this->addLoginCSSAndJavascript();
@@ -136,7 +136,7 @@ class JOGoogleAuth extends CMSPlugin implements SubscriberInterface
                 'label'			  => 'Google',
                 'tooltip'			=> 'Google login',
                 'id'				 => $randomId,
-                'data-webauthn-form' => $form,
+                'data-webauthn-form' => $formId,
                 // Extract image if it exists
                 'svg'                => $image,
                 'class'			  => 'plg_google_login_button btn-info w100'
