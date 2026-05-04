@@ -71,7 +71,7 @@ class UserController extends BaseController
         $oauth_client->setOption('tokenurl','https://www.googleapis.com/oauth2/v4/token');
         $this->oauth_client = $oauth_client; 
         parent::__construct($config);
-        $this->log("construct:end" . $this->ItemId);
+        $this->log("construct:end");
     }
     
     
@@ -118,6 +118,8 @@ class UserController extends BaseController
         }
         if ($this->oauth_client->isAuthenticated()) {
             $this->log("com_jogoogleauth.auth isauthentificated"  );
+            $token = $this->oauth_client->getToken();
+            $this->log("com_jogoogleauth.auth token :"  . print_r($token, true));
             $this->credentials = $credentials = 
                 json_decode($this->oauth_client->query('https://www.googleapis.com/oauth2/v1/userinfo?alt=json')->getBody(),true);
             $response = new \stdClass();

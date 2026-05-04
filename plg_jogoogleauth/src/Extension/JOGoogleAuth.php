@@ -113,8 +113,15 @@ class JOGoogleAuth extends CMSPlugin implements SubscriberInterface
      */
     public function onUserLoginButtons(Event $event): void
     {
+        // Escape fast if not front-end
+        if (!Factory::getApplication()->isClient('site')) {
+            return;
+        }
+
+        if (!$this->params->get('enabled', 1)) {
+            return;
+        }
         /** @var string $form The HTML ID of the form we are enclosed in */
-        
         $arguments = array_values($event->getArguments());
         $formId = $arguments[0] ?? '';
 
