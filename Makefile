@@ -1,4 +1,4 @@
-VERSION = "1.0.4"
+VERSION = "1.0.5"
 PACKAGE=pkg_jogoogleauth
 ZIPFILE = $(PACKAGE)-$(VERSION).zip
 UPDATEFILE = update_pkg.xml

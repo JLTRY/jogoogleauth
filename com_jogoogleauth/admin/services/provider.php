@@ -7,7 +7,7 @@
  * @copyright   Copyright (C) 2016 - 2025 JL TRYOEN, Inc. All rights reserved.
  * @license     GNU General Public License version 3 or later; see LICENSE.txt
  */
-
+use Joomla\CMS\Factory;
 use Joomla\CMS\Dispatcher\ComponentDispatcherFactoryInterface;
 use Joomla\CMS\Extension\ComponentInterface;
 use Joomla\CMS\Extension\MVCComponent;
@@ -33,6 +33,8 @@ return new class implements ServiceProviderInterface {
                 "\\JLTRY\\Component\\Jogoogleauth"
             )
         );
+        $lang = Factory::getApplication()->getLanguage();
+        $lang->load('com_jogoogleauth', JPATH_ADMINISTRATOR, null, true);
         $container->set(ComponentInterface::class, function (
             Container $container
         ) {

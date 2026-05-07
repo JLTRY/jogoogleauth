@@ -9,7 +9,7 @@
 
 namespace JLTRY\Component\Jogoogleauth\Administrator\Controller;
 use Joomla\CMS\MVC\Controller\BaseController;
-
+use Joomla\CMS\Router\Route;
 // No direct access to this file
 defined('_JEXEC') or die('Restricted access');
 
@@ -34,8 +34,11 @@ class DisplayController extends BaseController
     {
         $input = $this->app->getInput();
         // Set the default view (if not specified)
-        $input->set('view', $input->getCmd('view', 'Empty'));
-
+        $view = $input->get('view');
+        // If no view is specified, redirect to the component configuration
+        if (empty($view)) {
+            $this->app->redirect('index.php?option=com_config&view=component&component=com_jogoogleauth');
+        }
         // Call parent to display
         parent::display($cachable);
     }
