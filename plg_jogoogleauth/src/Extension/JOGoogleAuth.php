@@ -30,11 +30,8 @@ use Joomla\Event\SubscriberInterface;
 // phpcs:enable PSR1.Files.SideEffects
 
 /**
- * WebAuthn Passwordless Login plugin
+ * JoGoogleAuth Login plugin
  *
- * The plugin features are broken down into Traits for the sole purpose of making an otherwise
- * supermassive class somewhat manageable. You can find the Traits inside the Webauthn/PluginTraits
- * folder.
  *
  * @since  4.0.0
  */

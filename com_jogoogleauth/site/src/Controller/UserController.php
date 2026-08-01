@@ -15,6 +15,8 @@ use Joomla\CMS\MVC\Controller\BaseController;
 use Joomla\CMS\Language\Multilanguage;
 use Joomla\CMS\Uri\Uri;
 use Joomla\CMS\Router\Route;
+use Joomla\CMS\Plugin\PluginHelper;
+
 use JLTRY\Component\Jogoogleauth\Site\Helper\JOGoogleAuthHelper;
 
 // phpcs:disable PSR1.Files.SideEffects
@@ -164,11 +166,25 @@ class UserController extends BaseController
             $session->set('form_processed', true);
             $this->log("on user login end");
             $return = $app->input->getString('return', '');
-            if ($return != '')
-            {
-                
-            }
-            elseif ($redirecturi != "") {
+
+
+            // Trigger the onUserAfterLogin event to set the cookie to rememeber login
+            $options['user']         = $user;
+            $options['responseType'] = $response->type;
+            $options['remember']  = true;
+            // The user is successfully logged in. Run the after login events
+            $event = new \Joomla\CMS\Event\User\AfterLoginEvent(
+                'onUserAfterLogin',
+                [
+                    'options' => $options,
+                    'subject' => (array) $response,
+                ]
+            );
+            $dispatcher = $this->app->getDispatcher();
+            PluginHelper::importPlugin('authentication', 'cookie');
+            $dispatcher->dispatch($event->getName(), $event);
+            
+            if (($return == '') && ($redirecturi != "")) {
                 $this->log("on user login end redirect:" . $redirecturi);
                 $app->redirect($redirecturi);
             }
