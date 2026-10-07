@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="plugin" group="system" method="upgrade">
+    <name>plg_system_jogoogleauth</name>
+	<author>Jean-Luc TRYOEN</author>
+	<creationDate>October  7, 2026</creationDate>
+	<copyright>Copyright (C) 2012 - 2026 Jean-Luc TRYOEN. All rights reserved.</copyright>
+	<license>http://www.gnu.org/licenses/gpl-3.0.html GNU/GPL</license>
+	<authorEmail>jltryoen@orange.fr</authorEmail>
+	<authorUrl>www.jltryoen.fr</authorUrl>
+    <version>1.0.7</version>
+    <description>Charge les langues du composant User dans les paramètres du module.</description>
+    <namespace path="src">JLTRY\Plugin\System\JOGoogleAuth</namespace>
+    <files>
+		<folder plugin="jogoogleauth">services</folder>
+        <folder>src</folder>
+    </files>
+</extension>
