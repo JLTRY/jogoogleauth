@@ -11,6 +11,7 @@
 
 namespace JLTRY\Plugin\User\JOGoogleAuth\Extension;
 use Joomla\CMS\Event\CoreEventAware;
+use Joomla\CMS\Event\Model\PrepareFormEvent;
 use Joomla\CMS\Factory;
 use Joomla\CMS\HTML\HTMLHelper;
 use Joomla\CMS\Log\Log;
@@ -44,7 +45,32 @@ class JOGoogleAuth extends CMSPlugin implements SubscriberInterface
      * @since   4.0.0
      */
     private $injectedCSSandJS = false;
-    
+
+    /**
+     * Returns an array of events this subscriber will listen to.
+     *
+     * @return  array
+     *
+     * @since   4.2.0
+     */
+    public static function getSubscribedEvents(): array
+    {
+        try {
+            $app = Factory::getApplication();
+        } catch (\Exception $e) {
+            return [];
+        }
+        Log::add("getSubscribedEvents" , Log::WARNING, 'com_jogoogleauth');
+        if (!$app->isClient('site') && !$app->isClient('administrator')) {
+            return [];
+        }
+
+        return [
+            'onUserLoginButtons' => 'onUserLoginButtons',
+            'onContentPrepareForm' => 'onContentPrepareForm',
+        ];
+    }
+
     private function returnFromEvent(Event $event, $value = null): void
     {
         $result = $event->getArgument('result') ?: [];
@@ -147,29 +173,26 @@ class JOGoogleAuth extends CMSPlugin implements SubscriberInterface
             ],
         ]);
     }
-    
-    /**
-     * Returns an array of events this subscriber will listen to.
-     *
-     * @return  array
-     *
-     * @since   4.2.0
-     */
-    public static function getSubscribedEvents(): array
+
+    public function onContentPrepareForm(PrepareFormEvent $event): void
     {
-        try {
-            $app = Factory::getApplication();
-        } catch (\Exception $e) {
-            return [];
+        $form = $event->getForm();
+        $data = $event->getData();
+        Log::add("onContentPrepareForm" . $form->getName(), Log::WARNING, 'com_jogoogleauth');
+        // Vérifiez que le formulaire est celui d'un module
+        if (!($form instanceof Form) || $form->getName() !== 'com_modules.module') {
+            return;
         }
+        // Vérifiez que le module est bien "mod_jocoaching"
+        if (isset($data->module) && $data->module === 'mod_jogoogleauth') {
+            $lang = Factory::getLanguage();
+            // Récupérer la langue courante (ex: fr-FR, en-GB, etc.)
+            $currentLang = $lang->getTag();
 
-        if (!$app->isClient('site') && !$app->isClient('administrator')) {
-            return [];
+            // Charger les langues du composant et de Joomla pour la langue courante
+            $lang->load('com_jogoogleauth', JPATH_ADMINISTRATOR, $currentLang, true);
+            $lang->load('com_users', JPATH_ADMINISTRATOR, $currentLang, true);
         }
-
-        return [
-            'onUserLoginButtons' => 'onUserLoginButtons'
-        ];
     }
 
-}	
+}
