@@ -37,24 +37,20 @@ class JOGoogleAuthHelper
      */
     public static function getReturnUrl($params, $type)
     {
-        $app  = Factory::getApplication();
-        $menu = $app->getMenu();
-        if ($menu && $params) {
-            $item = $app->getMenu()->getItem($params->get($type));
+        $choice = $params->get('loginredirectchoice', 0);
+        $itemurl = $params->get('login_redirect_url', '');
+        $itemid = $params->get('login_redirect_menuitem', '');
+        $redirecturi = '';
+        if (($choice == 1) && ($itemid != '')) {
+            $app = Factory::getApplication();
+            $sitemenu = $app->getMenu(); 
+            $menuitem = $sitemenu->getItem($itemid);
+            $redirecturi = Uri::root() . $menuitem->link;
+        } 
+        if (($choice == 0) && ($itemurl != '')) {
+           $redirecturi = Uri::root() . $itemurl;
         }
-        // Stay on the same page
-        $url = Uri::getInstance()->toString();
-
-        if ($item)
-        {
-            $lang = '';
-            if (LanguageMultilang::isEnabled() && $item->language !== '*')
-            {
-                $lang = '&lang=' . $item->language;
-            }
-            $url = 'index.php?Itemid=' . $item->id . $lang;
-        }
-        return base64_encode($url);
+        return base64_encode($redirecturi);
     }
 
     /**

@@ -18,10 +18,13 @@
 		<folder>src</folder>
 		<folder>language</folder>
 	</files>
+	<media folder="media">
+		<folder>css</folder>
+	</media>
 	<scriptfile>install.jogoogleauth.php</scriptfile>
 	<config>
 		<fields name="params">
-			<fieldset name="params">
+			<fieldset name="basic">
 				<field
 					name="loginredirectchoice"
 					type="radio"
@@ -54,6 +57,13 @@
 				>
 					<option value="">JDEFAULT</option>
 				</field>
+				<field
+					name="moduleclass"
+					type="text"
+					label="MOD_JOGOOGLEAUTH_MODULECLASS_LABEL"
+					description="MOD_JOGOOGLEAUTH_MODULECLASS_DESC"
+					class="inputbox"
+				/>
 			</fieldset>	
 		</fields>
 	</config>

@@ -16,14 +16,21 @@ use Joomla\CMS\Language\Text;
 
 HTMLHelper::_('behavior.keepalive');
 HTMLHelper::_('bootstrap.tooltip');
+$wa = Factory::getApplication()->getDocument()->getWebAssetManager();
+$wa->registerAndUseStyle('mod_jogoogleauth', 'media/mod_jogoogleauth/css/mod_jogoogleauth.css');
+
+
+$moduleclass = $params->get('moduleclass', '');
 
 ?>
 <form action="<?php echo Route::_('index.php', true); ?>" method="post" id="login-form" class="form-inline">
-    
-    <div class="userdata">
+    <div class="userdata <?php echo htmlspecialchars($moduleclass, ENT_QUOTES, 'UTF-8'); ?>">
         <div id="form-login-submit" class="control-group">
             <div class="controls">
-                <button type="submit" tabindex="0" name="Submit" class="btn btn-info"><img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg"><?php echo Text::_('JLOGIN') ?></button>
+                <button type="submit" tabindex="0" name="Submit" class="btn btn-info">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg">
+                    <span id="login"><?php echo Text::_('JLOGIN') ?></span>
+                 </button>
             </div>
         </div>
         <input type="hidden" name="option" value="com_jogoogleauth" />
